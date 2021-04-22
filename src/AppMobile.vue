@@ -110,7 +110,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @font-face {
   font-family: "SF Pro Display-Regular";
   src: url("./assets/fonts/SFProDisplay-Regular.woff");
