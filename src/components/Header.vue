@@ -274,6 +274,7 @@ export default {
   height: 46px;
 }
 .header__container__input {
+  margin-left: 46px;
   flex: 1;
   background: #f5f5f5;
   border-radius: 13px;
