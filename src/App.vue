@@ -76,8 +76,9 @@ export default {
 body {
   margin: 0;
   padding: 0;
-  background: #e5e5e5;
+  background: #f4f4f4;
   font-family: "SF Pro Display-Regular";
+  color: hsla(240, 23%, 21%, 1);
 }
 button {
   cursor: pointer;
@@ -107,9 +108,8 @@ hr {
   margin: 15px 0px 20px 0px;
   position: absolute;
   left: 0;
-  height: 1px;
   width: 100%;
-  background: rgba(0, 0, 0);
+  border: 1px solid black;
   opacity: 0.1;
 }
 </style>

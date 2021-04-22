@@ -54,7 +54,7 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g clip-path="url(#clip0)">
+          <g clip-path="url(#clip1)">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -63,7 +63,7 @@
             />
           </g>
           <defs>
-            <clipPath id="clip0">
+            <clipPath id="clip1">
               <rect width="13" height="13" fill="white" />
             </clipPath>
           </defs>
@@ -120,7 +120,7 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0)">
+              <g clip-path="url(#clip3)">
                 <path
                   d="M12.976 4C6.10919 4 0.54248 9.37262 0.54248 16C0.54248 17.8721 0.999541 19.637 1.7917 21.2161L0.801918 26.5911C0.675996 27.2749 1.26913 27.8754 1.95444 27.7578L7.57153 26.7943C9.20757 27.5589 11.0363 28 12.976 28C19.8429 28 25.4095 22.6274 25.4095 16C25.4095 9.37262 19.8428 4 12.976 4Z"
                   fill="#D9D9D9"
@@ -138,7 +138,7 @@
                 fill="white"
               />
               <defs>
-                <clipPath id="clip0">
+                <clipPath id="clip3">
                   <rect
                     width="24.8671"
                     height="25"
