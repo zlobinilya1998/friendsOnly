@@ -296,6 +296,7 @@ export default {
   width: 267px;
 }
 .link__wrapper {
+  cursor: pointer;
   display: flex;
   align-items: center;
 }

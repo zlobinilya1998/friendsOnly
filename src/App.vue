@@ -110,6 +110,6 @@ hr {
   left: 0;
   width: 100%;
   border: 1px solid black;
-  opacity: 0.1;
+  opacity: 0.05;
 }
 </style>
