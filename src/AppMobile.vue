@@ -165,7 +165,7 @@ hr {
   height: 1px;
   width: 100%;
   background: rgba(0, 0, 0);
-  opacity: 0.03;
+  opacity: 0.1;
 }
 p {
   margin: 0;

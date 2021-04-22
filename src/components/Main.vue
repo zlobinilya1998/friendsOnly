@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <div class="about">
-        <h2 class="about__title">О нас</h2>
+        <h2 class="about__title">О нас 🤘</h2>
         <hr class="about__hr" />
         <section class="about__section">
           <p class="about__section__text">
