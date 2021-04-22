@@ -1,9 +1,10 @@
 import Vue from "vue";
-import App from "./App.vue";
-// import AppMobile from "./AppMobile.vue";
+import router from "./router";
+import Main from "./Main.vue";
 
 Vue.config.productionTip = false;
 
 new Vue({
-  render: (h) => h(App),
+  router,
+  render: (h) => h(Main),
 }).$mount("#app");
