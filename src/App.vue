@@ -1,59 +1,29 @@
 <template>
-  <div class="root">
-    <Header />
-    <Main :cards="cards" />
-    <Footer />
-  </div>
+  <component :is="layout" />
 </template>
 
 <script>
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Main from "./components/Main";
+import DesktopLayout from "./layouts/DesktopLayout.vue";
+import MobileLayout from "./layouts/MobileLayout.vue";
 
 export default {
-  name: "App",
   components: {
-    Header,
-    Footer,
-    Main,
+    DesktopLayout,
+    MobileLayout,
   },
-  data: () => ({
-    cards: [
-      {
-        title: "C/C++ Software Engineer",
-        responsibilities:
-          "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-        qualification:
-          "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-      },
-      {
-        title: "C/C++ Software Engineer",
-        responsibilities:
-          "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-        qualification:
-          "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-      },
-      {
-        title: "C/C++ Software Engineer",
-        responsibilities:
-          "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-        qualification:
-          "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-      },
-      {
-        title: "C/C++ Software Engineer",
-        responsibilities:
-          "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-        qualification:
-          "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-      },
-    ],
-  }),
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || "desktop") + "-layout";
+    },
+  },
 };
 </script>
 
 <style>
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/Roboto-Medium.ttf");
+}
 @font-face {
   font-family: "SF Pro Display-Regular";
   src: url("./assets/fonts/SFProDisplay-Regular.woff");

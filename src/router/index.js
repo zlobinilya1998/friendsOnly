@@ -1,15 +1,40 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import App from "../App";
-import AppMobile from "../AppMobile";
-
 Vue.use(VueRouter);
 
 const routes = [
   { path: "/", redirect: "/desktop" },
-  { path: "/desktop", component: App },
-  { path: "/mobile", component: AppMobile },
+  {
+    path: "/desktop",
+    meta: {
+      layout: "desktop",
+    },
+  },
+  {
+    path: "/mobile",
+    redirect: "/mobile/vacancy",
+  },
+  {
+    path: "/mobile/vacancy",
+    meta: {
+      layout: "mobile",
+    },
+    component: () => import("../mobile/views/Vacancy.vue"),
+  },
+  {
+    path: "/mobile/news",
+    meta: {
+      layout: "mobile",
+    },
+    component: () => import("../mobile/views/News.vue"),
+  },
+  {
+    path: "/mobile/news/:id",
+    meta: {
+      layout: "mobile",
+    },
+  },
 ];
 
 const router = new VueRouter({
