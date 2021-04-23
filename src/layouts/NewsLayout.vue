@@ -6,10 +6,7 @@
       <p class="comments-count">326 комментариев</p>
       <div v-for="(comment, index) of comments" :key="index" class="comment">
         <div class="text-wrapper">
-          <p>{{ comment.name }}</p>
-          <p>{{ comment.text }}</p>
-        </div>
-        <div class="like-wrapper">
+          <p class="text-name">{{ comment.name }}</p>
           <svg
             width="15"
             height="14"
@@ -23,7 +20,13 @@
               fill="black"
             />
           </svg>
-          <p>{{ comment.like }}</p>
+        </div>
+        <div class="like-wrapper">
+          <p class="text-description">{{ comment.text }}</p>
+          <p class="like-count">{{ comment.like }}</p>
+        </div>
+        <div v-if="comment.answers" class="answers">
+          Показать ответы ({{ comment.answers.length }})
         </div>
       </div>
     </div>
@@ -39,7 +42,7 @@ export default {
     return {
       newsBackground: {
         background: `url(${img}) no-repeat`,
-        height: "533px",
+        height: "450px",
         backgroundSize: "cover",
         backgroundPosition: "center",
         position: "relative",
@@ -51,6 +54,7 @@ export default {
           avatar: "",
           text: "сколько такой диван в долларах",
           like: 15,
+          answers: [1, 2],
         },
         {
           name: "n1kola3vi4",
@@ -74,8 +78,7 @@ export default {
 <style scoped>
 .post {
   top: 50%;
-  position: -webkit-sticky;
-  position: fixed;
+  position: absolute;
   background: #ffffff;
   border-radius: 13px 13px 0px 0px;
   padding: 25px 23px 40px 23px;
@@ -93,12 +96,55 @@ export default {
 .comments-count {
   margin-bottom: 20px;
   text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
 }
 .comment {
   margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.text-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-name {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  opacity: 0.5;
+}
+.text-description {
+  margin-top: 4px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
 }
 .like-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.like-count {
+  margin-top: 7px;
+  opacity: 0.3;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+}
+.answers {
+  margin-top: 6px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  opacity: 0.5;
 }
 </style>
