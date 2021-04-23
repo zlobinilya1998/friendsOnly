@@ -4,8 +4,7 @@
       v-for="(btn, index) of sliderBtn"
       :key="index"
       :style="{
-        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.535677) 0%, rgba(0, 0, 0, 0.85) 100%),
-          url(${news[0].background})`,
+        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.535677) 0%, rgba(0, 0, 0, 0.85) 100%)`,
       }"
       :class="`slider__item ${activeBtn == index ? 'active' : ''}`"
       v-on:click="activeBtn = index"
@@ -17,9 +16,6 @@
 
 <script>
 export default {
-  props: {
-    news: Array,
-  },
   data() {
     return {
       activeBtn: 0,
@@ -43,8 +39,7 @@ export default {
   border-radius: 50px;
   font-family: "Roboto";
   flex: none;
-  order: 0;
-  flex-grow: 0;
+  align-items: center;
   color: #ffffff;
   transition: all 0.5s ease;
 }

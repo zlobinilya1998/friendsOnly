@@ -30,9 +30,10 @@ const routes = [
     component: () => import("../mobile/views/News.vue"),
   },
   {
+    name: "Post",
     path: "/mobile/news/:id",
     meta: {
-      layout: "mobile",
+      layout: "news",
     },
   },
 ];
