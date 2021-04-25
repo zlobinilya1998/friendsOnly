@@ -85,4 +85,11 @@ hr {
   border: 1px solid black;
   opacity: 0.05;
 }
+input {
+  border: none;
+  font-family: "SF Pro Display-Regular";
+}
+input:focus {
+  outline: none;
+}
 </style>

@@ -1,47 +1,90 @@
 <template>
   <div class="content">
-    <div class="news-background" :style="newsBackground"></div>
+    <div class="news-background" :style="newsBackground">
+      <router-link
+        class="btn"
+        :style="{ background: `url(${btn})` }"
+        to="/mobile/news"
+      >
+        <svg
+          class="btn-icon"
+          width="5"
+          height="8"
+          viewBox="0 0 5 8"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M3.97949 7.8409L0.175093 4.38409C-0.0583631 4.17196 -0.0583631 3.82804 0.175094 3.61591L3.97949 0.159096C4.21294 -0.053032 4.59145 -0.053032 4.82491 0.159096C5.05836 0.371223 5.05836 0.715149 4.82491 0.927277L1.44322 4L4.82491 7.07272C5.05836 7.28485 5.05836 7.62878 4.82491 7.8409C4.59145 8.05303 4.21294 8.05303 3.97949 7.8409Z"
+            fill="white"
+            fill-opacity="0.9"
+          />
+        </svg>
+        <p class="btn-text">Назад</p></router-link
+      >
+    </div>
     <div class="post">
       <div class="pipe" />
-      <p class="comments-count">326 комментариев</p>
-      <div v-for="(comment, index) of comments" :key="index" class="comment">
-        <div class="text-wrapper">
-          <p class="text-name">{{ comment.name }}</p>
-          <svg
-            width="15"
-            height="14"
-            viewBox="0 0 15 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+      <p class="comments-count">{{ commentsCount }} комментария</p>
+      <Comment
+        v-for="comment of comments"
+        :comment="comment"
+        :key="comment.id"
+        :userAnswer="userAnswer"
+      />
+    </div>
+    <div class="input-wrapper">
+      <input class="input" v-model="input" placeholder="Написать комментарий" />
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g opacity="0.5">
+          <path
+            d="M22.5707 9.33375L3.20688 0.20324C2.39112 -0.181455 1.46951 -0.0122255 0.801771 0.644664C0.134036 1.30166 -0.145246 2.31395 0.0730043 3.28645L1.79655 10.9671H10.2353C10.6236 10.9671 10.9385 11.3249 10.9385 11.7662C10.9385 12.2075 10.6236 12.5653 10.2353 12.5653H1.79655L0.0730043 20.2459C-0.145246 21.2184 0.133989 22.2307 0.801771 22.8877C1.47087 23.5459 2.39257 23.713 3.20693 23.3291L22.5707 14.1986C23.4524 13.7829 24 12.8509 24 11.7662C24 10.6815 23.4524 9.7494 22.5707 9.33375Z"
+            fill="url(#paint0_linear)"
+          />
+        </g>
+        <defs>
+          <linearGradient
+            id="paint0_linear"
+            x1="-8.18183"
+            y1="-8.72728"
+            x2="27.2728"
+            y2="29.4546"
+            gradientUnits="userSpaceOnUse"
           >
-            <path
-              opacity="0.1"
-              d="M13.81 1.306C13.0336 0.463829 11.9681 0 10.8097 0C9.94389 0 9.15092 0.273743 8.45284 0.81356C8.10059 1.08604 7.78141 1.41941 7.5 1.80851C7.2187 1.41953 6.89941 1.08604 6.54705 0.81356C5.84908 0.273743 5.05611 0 4.19025 0C3.03188 0 1.96632 0.463829 1.18984 1.306C0.42263 2.13833 0 3.27541 0 4.50794C0 5.77652 0.472755 6.93775 1.48773 8.1625C2.39571 9.25804 3.70068 10.3702 5.21187 11.658C5.72788 12.0978 6.31279 12.5963 6.92013 13.1273C7.08057 13.2678 7.28645 13.3452 7.5 13.3452C7.71343 13.3452 7.91943 13.2678 8.07964 13.1275C8.68698 12.5964 9.27223 12.0977 9.78848 11.6576C11.2994 10.3701 12.6044 9.25804 13.5124 8.16238C14.5274 6.93775 15 5.77652 15 4.50783C15 3.27541 14.5774 2.13833 13.81 1.306Z"
-              fill="black"
-            />
-          </svg>
-        </div>
-        <div class="like-wrapper">
-          <p class="text-description">{{ comment.text }}</p>
-          <p class="like-count">{{ comment.like }}</p>
-        </div>
-        <div v-if="comment.answers" class="answers">
-          Показать ответы ({{ comment.answers.length }})
-        </div>
-      </div>
+            <stop stop-color="#499DFC" />
+            <stop offset="1" stop-color="#72B3FB" />
+          </linearGradient>
+        </defs>
+      </svg>
     </div>
   </div>
 </template>
 
 <script>
-import img from "../mobile/assets/news/News1.png";
+import Comment from "../mobile/components/Comment";
 
+import img from "../mobile/assets/news/News1.png";
+import btn from "../mobile/assets/newsLayout/btn.png";
 export default {
   name: "Post",
+  components: {
+    Comment,
+  },
   data() {
     return {
+      input: "",
+      btn,
       newsBackground: {
         background: `url(${img}) no-repeat`,
+        borderRadius: `0px 0px 20px 20px`,
         height: "450px",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -54,7 +97,9 @@ export default {
           avatar: "",
           text: "сколько такой диван в долларах",
           like: 15,
-          answers: [1, 2],
+          answers: ["Ответ1", "Ответ2"],
+          time: 4,
+          id: 0,
         },
         {
           name: "n1kola3vi4",
@@ -62,27 +107,66 @@ export default {
           text:
             "Прежде всего, внедрение современных методик предоставляет широкие возможности для стандартных подходов. Господа, перспективное планирование позволяет выполнить важные задания по разработке модели развития. Задача организации, в особенности же граница обучения кадров говорит о возможностях экспериментов, поражающих по своей масштабности и грандиозности.",
           like: 54,
+          time: 4,
+          answers: ["Я думаю да"],
+
+          id: 1,
         },
         {
           name: "petr.nikolaevi4",
           avatar: "",
           text: "сколько такой диван в долларах",
           like: 0,
+          time: 4,
+          id: 2,
         },
       ],
     };
+  },
+  computed: {
+    commentsCount() {
+      return this.comments.length;
+    },
+  },
+  methods: {
+    userAnswer(user) {
+      this.input = `Ответ ${user} `;
+    },
   },
 };
 </script>
 
 <style scoped>
-.post {
-  top: 50%;
+.btn {
   position: absolute;
+  left: 23px;
+  top: 30px;
+  height: 33px;
+  padding: 8px 13px 9px 13px;
+  border-radius: 50px;
+  font-family: "Roboto";
+  display: flex;
+  align-items: center;
+  transition: all 0.5s ease;
+  color: #ffffff;
+}
+.btn-text {
+  margin-left: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+.post {
+  position: fixed;
+  bottom: 0;
   background: #ffffff;
   border-radius: 13px 13px 0px 0px;
   padding: 25px 23px 40px 23px;
+  overflow: auto;
+  height: 400px;
 }
+
 .pipe {
   top: -10px;
   left: calc(50% - 40px / 2 + 0.5px);
@@ -101,50 +185,28 @@ export default {
   font-size: 14px;
   line-height: 17px;
 }
-.comment {
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-}
-.text-wrapper {
+.input-wrapper {
+  position: fixed;
+  min-height: 65px;
+  bottom: 100px;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 18px;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
-.text-name {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  opacity: 0.5;
-}
-.text-description {
-  margin-top: 4px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-}
-.like-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.like-count {
-  margin-top: 7px;
-  opacity: 0.3;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 11px;
-  line-height: 13px;
-  text-align: center;
-}
-.answers {
-  margin-top: 6px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 14px;
-  opacity: 0.5;
+.input {
+  min-height: 44px;
+  background: #f7f7f9;
+  border: 1px solid #ffffff;
+  border-radius: 100px;
+  flex: 1;
+  margin-right: 20px;
+  padding: 13px 14px;
+  text-align: left;
 }
 </style>
