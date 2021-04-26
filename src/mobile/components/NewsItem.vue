@@ -1,6 +1,7 @@
 <template>
     <div class="item">
-        <img :src="item.background" />
+        <div class="item-shadow"></div>
+        <img class="item-background" :src="item.background" />
         <div class="text-content">
             <p class="date">{{ item.date }}</p>
             <h5 class="description">{{ item.description }}</h5>
@@ -29,7 +30,6 @@
                             </clipPath>
                         </defs>
                     </svg>
-
                     {{ item.views }}K
                 </p>
                 <div class="like-blog">
@@ -57,7 +57,6 @@
                                 </clipPath>
                             </defs>
                         </svg>
-
                         {{ item.like }}
                     </p>
                     <p class="dislike">
@@ -89,7 +88,6 @@
                                 </clipPath>
                             </defs>
                         </svg>
-
                         {{ item.dislike }}
                     </p>
                 </div>
@@ -135,25 +133,32 @@ p {
     margin-top: 15px;
     display: flex;
     align-items: flex-end;
-    min-height: 307px;
     mix-blend-mode: multiply;
-    opacity: 0.95;
-
-    border-radius: 8px;
     position: relative;
+    height: 307px;
+    overflow-y: hidden;
 }
 .item:last-child {
-    margin-bottom: 15px;
+    margin-bottom: 55px;
 }
-.item > img {
-    object-fit: contain;
+.item-shadow {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    opacity: 0.95;
     background: linear-gradient(
         180deg,
         rgba(196, 196, 196, 0) 0%,
         rgba(0, 0, 0, 0.630208) 58.33%,
         #000000 100%
     );
+}
+.item-background {
+    object-fit: cover;
+    width: 100%;
 }
 .text-content {
     display: flex;
