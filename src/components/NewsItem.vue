@@ -119,7 +119,7 @@ export default {
 h5 {
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 150%;
   color: #ffffff;
 }
@@ -153,10 +153,8 @@ p {
 .date {
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
-  line-height: 165%;
-  color: #ffffff;
-  mix-blend-mode: normal;
+  font-size: 14px;
+  line-height: 150%;
   opacity: 0.75;
 }
 .description {
@@ -170,6 +168,10 @@ p {
 .views {
   display: flex;
   align-items: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 150%;
 }
 .like-blog {
   display: flex;
@@ -177,11 +179,19 @@ p {
 .like {
   display: flex;
   align-items: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 150%;
 }
 .dislike {
   display: flex;
   align-items: center;
   margin-left: 20px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 150%;
 }
 .views > svg,
 .like > svg,

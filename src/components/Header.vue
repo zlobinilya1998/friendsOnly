@@ -41,7 +41,7 @@
           </defs>
         </svg>
         <p class="header__container__logo__text">
-          FRIENDSONLY <span>WORK</span>
+          FRIENDSONLY <span>{{ headerTitle }}</span>
         </p>
       </div>
       <div class="header__container__input__wrapper">
@@ -231,6 +231,11 @@
 <script>
 export default {
   name: "Header",
+  computed: {
+    headerTitle() {
+      return this.$route.path.includes("news") ? "NEWS" : "WORK";
+    },
+  },
 };
 </script>
 
