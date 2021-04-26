@@ -93,4 +93,9 @@ input {
 input:focus {
     outline: none;
 }
+img {
+    padding: 0;
+    margin: 0;
+    height: auto;
+}
 </style>

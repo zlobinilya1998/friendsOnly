@@ -22,8 +22,7 @@
                 <p class="btn-text">Назад</p></router-link
             >
         </div>
-        <div class="post">
-            <div class="pipe" />
+        <div class="post" :style="{ bottom: postHeight + 'px' }">
             <p class="comments-count">{{ commentsCount }} комментария</p>
             <Comment
                 v-for="comment of comments"
@@ -35,13 +34,15 @@
         <div class="input-wrapper">
             <input class="input" v-model="input" placeholder="Написать комментарий" />
             <svg
+                @mouseenter="svgOpacity = 1"
+                @mouseleave="svgOpacity = 0.5"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <g opacity="0.5">
+                <g :opacity="svgOpacity">
                     <path
                         d="M22.5707 9.33375L3.20688 0.20324C2.39112 -0.181455 1.46951 -0.0122255 0.801771 0.644664C0.134036 1.30166 -0.145246 2.31395 0.0730043 3.28645L1.79655 10.9671H10.2353C10.6236 10.9671 10.9385 11.3249 10.9385 11.7662C10.9385 12.2075 10.6236 12.5653 10.2353 12.5653H1.79655L0.0730043 20.2459C-0.145246 21.2184 0.133989 22.2307 0.801771 22.8877C1.47087 23.5459 2.39257 23.713 3.20693 23.3291L22.5707 14.1986C23.4524 13.7829 24 12.8509 24 11.7662C24 10.6815 23.4524 9.7494 22.5707 9.33375Z"
                         fill="url(#paint0_linear)"
@@ -75,6 +76,7 @@ const NewsLayout = {
         Comment,
     },
     data: () => ({
+        postHeight: 0,
         img,
         input: "",
         newsBackground: {},
@@ -108,6 +110,7 @@ const NewsLayout = {
                 id: 2,
             },
         ],
+        svgOpacity: 0.5,
     }),
     computed: {
         commentsCount() {
@@ -128,13 +131,12 @@ export default NewsLayout;
 
 <style scoped>
 .news-background {
-    border-radius: 0px 0px 20px 20px;
-    min-height: 530px;
     position: relative;
 }
 .news-background > img {
     object-fit: contain;
     width: 100%;
+    border-radius: 0px 0px 20px 20px;
 }
 .btn {
     position: absolute;
@@ -158,8 +160,7 @@ export default NewsLayout;
     line-height: 16px;
 }
 .post {
-    position: fixed;
-    bottom: 0;
+    position: absolute;
     background: #ffffff;
     border-radius: 13px 13px 0px 0px;
     padding: 25px 23px 60px 23px;
@@ -167,25 +168,18 @@ export default NewsLayout;
     height: 400px;
 }
 
-.pipe {
-    top: -10px;
-    left: calc(50% - 40px / 2 + 0.5px);
-    width: 40px;
-    height: 4px;
-    position: absolute;
-    background: #ffffff;
-    border-radius: 80px;
-    z-index: 100;
-}
-
 .comments-count {
+    position: relative;
     margin-bottom: 20px;
     text-align: center;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
+    display: flex;
+    justify-content: center;
 }
+
 .input-wrapper {
     position: fixed;
     min-height: 65px;
@@ -199,6 +193,12 @@ export default NewsLayout;
     background: #ffffff;
     border-top: 1px solid rgba(0, 0, 0, 0.03);
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+.input-wrapper > svg {
+    cursor: pointer;
+}
+.input-wrapper > svg > g {
+    transition: all 0.3s ease;
 }
 .input {
     min-height: 44px;

@@ -1,11 +1,6 @@
 <template>
-    <div
-        class="item"
-        :style="{
-            background: `linear-gradient(180deg,rgba(196, 196, 196, 0) 0%,rgba(0, 0, 0, 0.630208) 58.33%,#000000 100%),
-        url(${item.background})`,
-        }"
-    >
+    <div class="item">
+        <img :src="item.background" />
         <div class="text-content">
             <p class="date">{{ item.date }}</p>
             <h5 class="description">{{ item.description }}</h5>
@@ -137,19 +132,34 @@ p {
 
 .item {
     cursor: pointer;
-    padding: 0px 16px 23px 16px;
     margin-top: 15px;
     display: flex;
     align-items: flex-end;
     min-height: 307px;
     mix-blend-mode: multiply;
     opacity: 0.95;
+
     border-radius: 8px;
-    background-size: cover;
+    position: relative;
+}
+.item:last-child {
+    margin-bottom: 15px;
+}
+.item > img {
+    object-fit: contain;
+    width: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(196, 196, 196, 0) 0%,
+        rgba(0, 0, 0, 0.630208) 58.33%,
+        #000000 100%
+    );
 }
 .text-content {
     display: flex;
     flex-direction: column;
+    position: absolute;
+    padding: 0px 17px 23px 16px;
 }
 .date {
     font-style: normal;
