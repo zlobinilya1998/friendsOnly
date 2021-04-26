@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div>
     <Header />
     <Slider v-if="showSlider" />
     <div class="container">

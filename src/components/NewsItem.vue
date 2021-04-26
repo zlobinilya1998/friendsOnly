@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="item"
-    :style="{
-      background: `linear-gradient(180deg,rgba(196, 196, 196, 0) 0%,rgba(0, 0, 0, 0.630208) 58.33%,#000000 100%),
-        url(${item.background})`,
-    }"
-  >
+  <div class="item" :style="backgroundStyle">
     <div class="text-content">
       <p class="date">{{ item.date }}</p>
       <h5 class="description">{{ item.description }}</h5>
@@ -109,6 +103,15 @@ export default {
   props: {
     item: Object,
   },
+  data() {
+    return {
+      backgroundStyle: {
+        background: `linear-gradient(180deg,rgba(196, 196, 196, 0) 0%,rgba(0, 0, 0, 0.630208) 58.33%,#000000 100%),
+        url(${this.item.background}) no-repeat`,
+        backgroundSize: "cover",
+      },
+    };
+  },
 };
 </script>
 
@@ -129,22 +132,19 @@ p {
   line-height: 150%;
   opacity: 0.5;
 }
-.news {
-  display: flex;
-  flex-direction: column;
-}
 
 .item {
+  width: 440px;
+  min-height: 410px;
   cursor: pointer;
-  padding: 0px 16px 23px 16px;
+  padding: 0px 20px 32px 20px;
   margin-top: 15px;
   display: flex;
   align-items: flex-end;
-  min-height: 307px;
   mix-blend-mode: multiply;
   opacity: 0.95;
   border-radius: 8px;
-  background-size: cover;
+  background-repeat: no-repeat;
 }
 .text-content {
   display: flex;

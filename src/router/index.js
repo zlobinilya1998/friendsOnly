@@ -10,6 +10,14 @@ const routes = [
     meta: {
       layout: "desktop",
     },
+    component: () => import("../components/Main.vue"),
+  },
+  {
+    path: "/desktop/news",
+    meta: {
+      layout: "desktop",
+    },
+    component: () => import("../views/News.vue"),
   },
   {
     path: "/mobile",
