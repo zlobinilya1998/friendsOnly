@@ -1,6 +1,7 @@
 <template>
   <div class="root">
     <Header />
+    <Slider v-if="showSlider" />
     <div class="container">
       <router-view></router-view>
     </div>
@@ -9,10 +10,22 @@
 
 <script>
 import Header from "../mobile/components/Header";
+import Slider from "../mobile/components/Slider";
 
 export default {
   components: {
     Header,
+    Slider,
+  },
+  data() {
+    return {
+      route: this.$route.fullPath,
+    };
+  },
+  computed: {
+    showSlider() {
+      return this.route == "/mobile/news";
+    },
   },
 };
 </script>

@@ -28,13 +28,15 @@ const routes = [
       layout: "mobile",
     },
     component: () => import("../mobile/views/News.vue"),
-  },
-  {
-    name: "Post",
-    path: "/mobile/news/:id",
-    meta: {
-      layout: "news",
-    },
+    children: [
+      {
+        name: "Post",
+        path: ":id",
+        meta: {
+          layout: "news",
+        },
+      },
+    ],
   },
 ];
 

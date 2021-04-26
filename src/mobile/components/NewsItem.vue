@@ -138,6 +138,7 @@ p {
 }
 
 .item {
+  cursor: pointer;
   padding: 0px 16px 23px 16px;
   margin-top: 15px;
   display: flex;

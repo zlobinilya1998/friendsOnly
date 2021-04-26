@@ -163,6 +163,7 @@ export default {
   text-align: center;
 }
 .answers {
+  cursor: pointer;
   margin-top: 6px;
   font-style: normal;
   font-weight: normal;

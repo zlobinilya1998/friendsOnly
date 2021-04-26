@@ -1,17 +1,17 @@
 <template>
-  <div class="news">
-    <Slider />
-    <NewsItem
-      v-for="item of news"
-      :key="item.id"
-      :item="item"
-      @click.native="clickNews(item.id)"
-    />
+  <div>
+    <div class="news">
+      <NewsItem
+        v-for="item of news"
+        :key="item.id"
+        :item="item"
+        @click.native="clickNews(item.id)"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import Slider from "../components/Slider";
 import NewsItem from "../components/NewsItem";
 
 import image1 from "../assets/news/News1.png";
@@ -19,7 +19,6 @@ import image1 from "../assets/news/News1.png";
 export default {
   name: "News",
   components: {
-    Slider,
     NewsItem,
   },
   data() {

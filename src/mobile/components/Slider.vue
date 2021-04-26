@@ -6,7 +6,7 @@
       :style="{
         background: `linear-gradient(180deg, rgba(0, 0, 0, 0.535677) 0%, rgba(0, 0, 0, 0.85) 100%)`,
       }"
-      :class="`slider__item ${activeBtn == index ? 'active' : ''}`"
+      :class="`item ${activeBtn == index ? 'active' : ''}`"
       v-on:click="activeBtn = index"
     >
       {{ btn }}
@@ -27,14 +27,16 @@ export default {
 
 <style scoped>
 .slider {
+  padding-left: 23px;
   height: 71px;
   overflow-x: scroll;
   background: transparent;
   display: flex;
   align-items: center;
 }
-.slider__item {
+.item {
   height: 41px;
+  cursor: pointer;
   padding: 12px 15px 13px;
   border-radius: 50px;
   font-family: "Roboto";
@@ -43,10 +45,10 @@ export default {
   color: #ffffff;
   transition: all 0.5s ease;
 }
-.slider__item:nth-child(n + 2) {
+.item:nth-child(n + 2) {
   margin-left: 8px;
 }
-.slider__item.active {
+.item.active {
   background: #469bfc !important;
 }
 </style>
