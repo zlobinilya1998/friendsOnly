@@ -71,58 +71,58 @@
 <script>
 import Comment from "../mobile/components/Comment";
 
-import img from "../mobile/assets/news/News1.png";
+import img from "../../public/img/News1.png";
+
 import btn from "../mobile/assets/newsLayout/btn.png";
+
 export default {
   name: "Post",
   components: {
     Comment,
   },
-  data() {
-    return {
-      input: "",
-      btn,
-      newsBackground: {
-        background: `url(${img}) no-repeat`,
-        borderRadius: `0px 0px 20px 20px`,
-        height: "450px",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        position: "relative",
+  data: () => ({
+    input: "",
+    btn,
+    newsBackground: {
+      background: `url(${img}) no-repeat`,
+      borderRadius: `0px 0px 20px 20px`,
+      height: "450px",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      position: "relative",
+    },
+    postId: this.$route.params.post,
+    comments: [
+      {
+        name: "petr.nikolaevi4",
+        avatar: "",
+        text: "сколько такой диван в долларах",
+        like: 15,
+        answers: ["Ответ1", "Ответ2"],
+        time: 4,
+        id: 0,
       },
-      postId: this.$route.params.post,
-      comments: [
-        {
-          name: "petr.nikolaevi4",
-          avatar: "",
-          text: "сколько такой диван в долларах",
-          like: 15,
-          answers: ["Ответ1", "Ответ2"],
-          time: 4,
-          id: 0,
-        },
-        {
-          name: "n1kola3vi4",
-          avatar: "",
-          text:
-            "Прежде всего, внедрение современных методик предоставляет широкие возможности для стандартных подходов. Господа, перспективное планирование позволяет выполнить важные задания по разработке модели развития. Задача организации, в особенности же граница обучения кадров говорит о возможностях экспериментов, поражающих по своей масштабности и грандиозности.",
-          like: 54,
-          time: 4,
-          answers: ["Я думаю да"],
+      {
+        name: "n1kola3vi4",
+        avatar: "",
+        text:
+          "Прежде всего, внедрение современных методик предоставляет широкие возможности для стандартных подходов. Господа, перспективное планирование позволяет выполнить важные задания по разработке модели развития. Задача организации, в особенности же граница обучения кадров говорит о возможностях экспериментов, поражающих по своей масштабности и грандиозности.",
+        like: 54,
+        time: 4,
+        answers: ["Я думаю да"],
 
-          id: 1,
-        },
-        {
-          name: "petr.nikolaevi4",
-          avatar: "",
-          text: "сколько такой диван в долларах",
-          like: 0,
-          time: 4,
-          id: 2,
-        },
-      ],
-    };
-  },
+        id: 1,
+      },
+      {
+        name: "petr.nikolaevi4",
+        avatar: "",
+        text: "сколько такой диван в долларах",
+        like: 0,
+        time: 4,
+        id: 2,
+      },
+    ],
+  }),
   computed: {
     commentsCount() {
       return this.comments.length;

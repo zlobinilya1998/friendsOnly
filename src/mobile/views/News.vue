@@ -14,7 +14,7 @@
 <script>
 import NewsItem from "../components/NewsItem";
 
-import image1 from "../assets/news/News1.png";
+import image1 from "../../../public/img/News1.png";
 
 export default {
   name: "News",

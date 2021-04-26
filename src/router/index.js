@@ -3,6 +3,13 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+const Main = () => import("../components/Main.vue");
+const News = () => import("../views/News.vue");
+const NewsOpen = () => import("../views/NewsOpen.vue");
+const Vacancy = () => import("../mobile/views/Vacancy.vue");
+
+const MobileNews = () => import("../mobile/views/News.vue");
+
 const routes = [
   { path: "/", redirect: "/desktop" },
   {
@@ -10,14 +17,22 @@ const routes = [
     meta: {
       layout: "desktop",
     },
-    component: () => import("../components/Main.vue"),
+    component: Main,
   },
   {
     path: "/desktop/news",
     meta: {
       layout: "desktop",
     },
-    component: () => import("../views/News.vue"),
+    component: News,
+  },
+  {
+    name: "newsId",
+    path: "/desktop/news/:id",
+    meta: {
+      layout: "desktop",
+    },
+    component: NewsOpen,
   },
   {
     path: "/mobile",
@@ -28,14 +43,14 @@ const routes = [
     meta: {
       layout: "mobile",
     },
-    component: () => import("../mobile/views/Vacancy.vue"),
+    component: Vacancy,
   },
   {
     path: "/mobile/news",
     meta: {
       layout: "mobile",
     },
-    component: () => import("../mobile/views/News.vue"),
+    component: MobileNews,
     children: [
       {
         name: "Post",

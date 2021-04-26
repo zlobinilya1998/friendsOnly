@@ -1,5 +1,10 @@
 import Vue from "vue";
 import router from "./router";
+
+import VueAwesomeSwiper from "vue-awesome-swiper";
+
+Vue.use(VueAwesomeSwiper);
+
 import App from "./App.vue";
 
 Vue.config.productionTip = false;

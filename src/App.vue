@@ -24,23 +24,23 @@ export default {
 <style>
 @font-face {
   font-family: "Roboto";
-  src: url("./assets/fonts/Roboto-Medium.ttf");
+  src: url("../public/font/Roboto-Medium.ttf");
 }
 @font-face {
   font-family: "SF Pro Display-Regular";
-  src: url("./assets/fonts/SFProDisplay-Regular.woff");
+  src: url("../public/font/SFProDisplay-Regular.woff");
 }
 @font-face {
   font-family: "SF Pro Display-Semibold";
-  src: url("./assets/fonts/SFProDisplay-Semibold.woff");
+  src: url("../public/font/SFProDisplay-Semibold.woff");
 }
 @font-face {
   font-family: "SF Pro Display-Bold";
-  src: url("./assets/fonts/SFProDisplay-Bold.woff");
+  src: url("../public/font/SFProDisplay-Bold.woff");
 }
 @font-face {
   font-family: "SF Pro Rounded-Regular";
-  src: url("./assets/fonts/SFProRounded-Regular.woff");
+  src: url("../public/font/SFProRounded-Regular.woff");
 }
 * {
   box-sizing: border-box;

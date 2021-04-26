@@ -1,29 +1,15 @@
 <template>
   <div>
-    <div class="btn" @click="backToMain">
-      <svg
-        width="5"
-        height="9"
-        viewBox="0 0 5 9"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          opacity="0.8"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M3.97949 8.82102L0.175092 4.9321C-0.0583645 4.69346 -0.0583645 4.30654 0.175092 4.0679L3.97949 0.178982C4.21294 -0.059661 4.59145 -0.0596609 4.82491 0.178982C5.05836 0.417625 5.05836 0.804543 4.82491 1.04319L1.44322 4.5L4.82491 7.95681C5.05836 8.19546 5.05836 8.58237 4.82491 8.82102C4.59145 9.05966 4.21294 9.05966 3.97949 8.82102Z"
-          fill="#292941"
-          fill-opacity="0.5"
-        />
-      </svg>
-      Назад
-    </div>
-
+    <ButtonBack route="desktop" />
     <div class="container">
       <Slider />
       <div class="news-blog">
-        <NewsItem v-for="item in news" :key="item.id" :item="item" />
+        <NewsItem
+          v-for="item in news"
+          :key="item.id"
+          :item="item"
+          @click.native="clickNews(item.id)"
+        />
       </div>
     </div>
   </div>
@@ -31,16 +17,18 @@
 
 <script>
 import Slider from "../components/Slider";
-
 import NewsItem from "../components/NewsItem";
-import image1 from "../assets/news/img1.png";
-import image2 from "../assets/news/img2.png";
+import ButtonBack from "../components/btn/ButtonBack";
+
+import image1 from "../../public/img/img1.png";
+import image2 from "../../public/img/img2.png";
 
 export default {
   name: "News",
   components: {
     Slider,
     NewsItem,
+    ButtonBack,
   },
   data() {
     return {
@@ -89,8 +77,13 @@ export default {
     };
   },
   methods: {
-    backToMain() {
-      this.$router.push("/desktop");
+    clickNews(index) {
+      this.$router.push({
+        name: "newsId",
+        params: {
+          id: index,
+        },
+      });
     },
   },
 };
@@ -109,6 +102,7 @@ export default {
   cursor: pointer;
 }
 .container {
+  position: relative;
   width: 940px;
   margin: 0 auto;
   background: #ffffff;
