@@ -10,12 +10,13 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default {
+let DesktopLayout = {
   components: {
     Header,
     Footer,
   },
 };
+export default DesktopLayout;
 </script>
 
 <style></style>

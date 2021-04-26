@@ -125,9 +125,10 @@
 </template>
 
 <script>
-export default {
+const LikeBar = {
   name: "LikeBar",
 };
+export default LikeBar;
 </script>
 
 <style scoped>

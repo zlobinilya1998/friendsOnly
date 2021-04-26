@@ -7,7 +7,7 @@ import DesktopLayout from "./layouts/DesktopLayout.vue";
 import MobileLayout from "./layouts/MobileLayout.vue";
 import NewsLayout from "./layouts/NewsLayout.vue";
 
-export default {
+const App = {
   components: {
     DesktopLayout,
     MobileLayout,
@@ -19,6 +19,7 @@ export default {
     },
   },
 };
+export default App;
 </script>
 
 <style>

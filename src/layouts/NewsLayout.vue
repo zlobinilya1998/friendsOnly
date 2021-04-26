@@ -1,11 +1,7 @@
 <template>
   <div class="content">
     <div class="news-background" :style="newsBackground">
-      <router-link
-        class="btn"
-        :style="{ background: `url(${btn})` }"
-        to="/mobile/news"
-      >
+      <router-link class="btn" to="/mobile/news">
         <svg
           class="btn-icon"
           width="5"
@@ -70,19 +66,15 @@
 
 <script>
 import Comment from "../mobile/components/Comment";
-
 import img from "../../public/img/News1.png";
 
-import btn from "../mobile/assets/newsLayout/btn.png";
-
-export default {
-  name: "Post",
+let NewsLayout = {
+  name: "NewsLayout",
   components: {
     Comment,
   },
   data: () => ({
     input: "",
-    btn,
     newsBackground: {
       background: `url(${img}) no-repeat`,
       borderRadius: `0px 0px 20px 20px`,
@@ -134,6 +126,7 @@ export default {
     },
   },
 };
+export default NewsLayout;
 </script>
 
 <style scoped>

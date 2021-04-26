@@ -101,18 +101,17 @@
 </template>
 
 <script>
-export default {
+const Comment = {
   name: "Comment",
   props: {
     comment: Object,
     userAnswer: Function,
   },
-  data() {
-    return {
-      showAnswers: false,
-    };
-  },
+  data: () => ({
+    showAnswers: false,
+  }),
 };
+export default Comment;
 </script>
 
 <style scoped>

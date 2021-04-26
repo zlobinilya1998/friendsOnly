@@ -98,7 +98,7 @@
 </template>
 
 <script>
-export default {
+const NewsItem = {
   name: "NewsItem",
   props: {
     item: Object,
@@ -113,6 +113,7 @@ export default {
     };
   },
 };
+export default NewsItem;
 </script>
 
 <style scoped>

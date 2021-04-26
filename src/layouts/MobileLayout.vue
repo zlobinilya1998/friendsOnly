@@ -12,15 +12,14 @@
 import Header from "../mobile/components/Header";
 import Slider from "../mobile/components/Slider";
 
-export default {
+let MobileLayout = {
+  name: "MobileLayout",
   components: {
     Header,
     Slider,
   },
   data() {
-    return {
-      route: this.$route.fullPath,
-    };
+    return { route: this.$route.fullPath };
   },
   computed: {
     showSlider() {
@@ -28,6 +27,7 @@ export default {
     },
   },
 };
+export default MobileLayout;
 </script>
 
 <style scoped>

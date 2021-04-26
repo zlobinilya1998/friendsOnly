@@ -15,14 +15,13 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      activeBtn: 0,
-      sliderBtn: ["Все", "Для создателей", "Для друзей", "Обновления"],
-    };
-  },
+const Slider = {
+  data: () => ({
+    activeBtn: 0,
+    sliderBtn: ["Все", "Для создателей", "Для друзей", "Обновления"],
+  }),
 };
+export default Slider;
 </script>
 
 <style scoped>

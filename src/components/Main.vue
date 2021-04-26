@@ -72,7 +72,7 @@
 </template>
 
 <script>
-export default {
+const Main = {
   name: "Main",
   data() {
     return {
@@ -109,6 +109,7 @@ export default {
     };
   },
 };
+export default Main;
 </script>
 
 <style scoped>

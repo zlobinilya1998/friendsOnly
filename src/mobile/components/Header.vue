@@ -45,7 +45,7 @@
 </template>
 
 <script>
-export default {
+const Header = {
   name: "Header",
   computed: {
     headerTitle() {
@@ -53,6 +53,7 @@ export default {
     },
   },
 };
+export default Header;
 </script>
 
 <style scoped>

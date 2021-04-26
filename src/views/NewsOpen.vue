@@ -15,7 +15,7 @@ import ButtonBack from "../components/btn/ButtonBack.vue";
 
 import image1 from "../../public/img/img1.png";
 
-export default {
+const NewsOpen = {
   name: "NewsOpen",
   components: {
     NewsItem,
@@ -39,6 +39,7 @@ export default {
     };
   },
 };
+export default NewsOpen;
 </script>
 
 <style scoped>

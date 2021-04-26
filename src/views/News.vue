@@ -23,7 +23,7 @@ import ButtonBack from "../components/btn/ButtonBack";
 import image1 from "../../public/img/img1.png";
 import image2 from "../../public/img/img2.png";
 
-export default {
+const News = {
   name: "News",
   components: {
     Slider,
@@ -87,6 +87,7 @@ export default {
     },
   },
 };
+export default News;
 </script>
 
 <style scoped>
