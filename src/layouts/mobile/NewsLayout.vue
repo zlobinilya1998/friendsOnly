@@ -22,6 +22,7 @@
                 <p class="btn-text">Назад</p></router-link
             >
         </div>
+
         <div class="comments-wrapper">
             <p class="comments-count">{{ commentsCount }} комментария</p>
             <Comment

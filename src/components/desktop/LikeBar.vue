@@ -1,6 +1,6 @@
 <template>
     <div class="like-bar">
-        <div class="item">
+        <div class="item like">
             <svg
                 width="20"
                 height="20"
@@ -27,7 +27,7 @@
                 </defs>
             </svg>
         </div>
-        <div class="item">
+        <div class="item dislike">
             <svg
                 width="20"
                 height="20"
@@ -57,7 +57,7 @@
                 </defs>
             </svg>
         </div>
-        <div class="item">
+        <div class="item message">
             <svg
                 width="20"
                 height="20"
@@ -72,7 +72,7 @@
                 />
             </svg>
         </div>
-        <div class="item">
+        <div class="item share">
             <svg
                 width="20"
                 height="20"
@@ -87,7 +87,7 @@
                 />
             </svg>
         </div>
-        <div class="item">
+        <div class="item logo">
             <svg
                 width="26"
                 height="21"
