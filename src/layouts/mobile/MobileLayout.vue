@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from "../components/mobile/Header";
+import Header from "../../components/mobile/Header";
 
 let MobileLayout = {
     name: "MobileLayout",

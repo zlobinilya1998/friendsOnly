@@ -22,7 +22,7 @@
                 <p class="btn-text">Назад</p></router-link
             >
         </div>
-        <div class="post" :style="{ bottom: postHeight + 'px' }">
+        <div class="comments-wrapper">
             <p class="comments-count">{{ commentsCount }} комментария</p>
             <Comment
                 v-for="comment of comments"
@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import Comment from "../components/mobile/Comment";
-import img from "../../public/img/News1.png";
+import Comment from "../../components/mobile/Comment";
+import img from "../../../public/img/News1.png";
 
 const NewsLayout = {
     name: "NewsLayout",
@@ -76,7 +76,6 @@ const NewsLayout = {
         Comment,
     },
     data: () => ({
-        postHeight: 0,
         img,
         input: "",
         newsBackground: {},
@@ -159,7 +158,8 @@ export default NewsLayout;
     font-size: 14px;
     line-height: 16px;
 }
-.post {
+.comments-wrapper {
+    bottom: 0;
     position: absolute;
     background: #ffffff;
     border-radius: 13px 13px 0px 0px;

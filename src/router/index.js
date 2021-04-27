@@ -3,12 +3,15 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+//desktop
 const Main = () => import("../components/desktop/Main.vue");
 const News = () => import("../views/desktop/News.vue");
 const NewsOpen = () => import("../views/desktop/NewsOpen.vue");
 
+//mobile
 const Vacancy = () => import("../views/mobile/Vacancy.vue");
 const MobileNews = () => import("../views/mobile/News.vue");
+const MobileNewsOpen = () => import("../views/mobile/NewsOpen.vue");
 
 const routes = [
     { path: "/", redirect: "/desktop" },
@@ -61,6 +64,7 @@ const routes = [
             },
         ],
     },
+    { path: "/mobile/newsOpen", meta: { layout: "mobile" }, component: MobileNewsOpen },
 ];
 
 const router = new VueRouter({

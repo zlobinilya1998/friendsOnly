@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import DesktopLayout from "./layouts/DesktopLayout.vue";
-import MobileLayout from "./layouts/MobileLayout.vue";
-import NewsLayout from "./layouts/NewsLayout.vue";
+import DesktopLayout from "./layouts/desktop/DesktopLayout.vue";
+import MobileLayout from "./layouts/mobile/MobileLayout.vue";
+import NewsLayout from "./layouts/mobile/NewsLayout.vue";
 
 const App = {
     components: {
