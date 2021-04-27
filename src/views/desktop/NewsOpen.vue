@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import LikeBar from "../components/LikeBar.vue";
-import NewsItem from "../components/NewsItem.vue";
-import ButtonBack from "../components/btn/ButtonBack.vue";
+import LikeBar from "../../components/desktop/LikeBar";
+import NewsItem from "../../components/desktop/NewsItem";
+import ButtonBack from "../../components/desktop/btn/ButtonBack";
 
-import image1 from "../../public/img/img1.png";
+import image1 from "../../../public/img/img1.png";
 
 const NewsOpen = {
     name: "NewsOpen",

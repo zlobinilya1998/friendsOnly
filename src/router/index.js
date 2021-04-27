@@ -3,12 +3,12 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-const Main = () => import("../components/Main.vue");
-const News = () => import("../views/News.vue");
-const NewsOpen = () => import("../views/NewsOpen.vue");
-const Vacancy = () => import("../mobile/views/Vacancy.vue");
+const Main = () => import("../components/desktop/Main.vue");
+const News = () => import("../views/desktop/News.vue");
+const NewsOpen = () => import("../views/desktop/NewsOpen.vue");
 
-const MobileNews = () => import("../mobile/views/News.vue");
+const Vacancy = () => import("../views/mobile/Vacancy.vue");
+const MobileNews = () => import("../views/mobile/News.vue");
 
 const routes = [
     { path: "/", redirect: "/desktop" },

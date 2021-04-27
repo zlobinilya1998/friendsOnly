@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import Comment from "../mobile/components/Comment";
+import Comment from "../components/mobile/Comment";
 import img from "../../public/img/News1.png";
 
 const NewsLayout = {

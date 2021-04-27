@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="about">
             <h3 class="about__title">
                 О нас
@@ -98,6 +98,12 @@ export default {
 </script>
 
 <style scoped>
+.container {
+    padding: 0px 23px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-bottom: 55px;
+}
 .about {
     margin-top: 30px;
     padding: 20px 20px 20px 18px;

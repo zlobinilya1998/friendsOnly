@@ -1,11 +1,10 @@
 <template>
     <div>
-        <ButtonBack route="desktop" />
+        <Slider />
         <div class="container">
-            <Slider />
-            <div class="news-blog">
+            <div class="news">
                 <NewsItem
-                    v-for="item in news"
+                    v-for="item of news"
                     :key="item.id"
                     :item="item"
                     @click.native="clickNews(item.id)"
@@ -16,19 +15,16 @@
 </template>
 
 <script>
-import Slider from "../components/Slider";
-import NewsItem from "../components/NewsItem";
-import ButtonBack from "../components/btn/ButtonBack";
+import NewsItem from "../../components/mobile/NewsItem";
+import Slider from "../../components/mobile/Slider";
 
-import image1 from "../../public/img/img1.png";
-import image2 from "../../public/img/img2.png";
+import image1 from "../../../public/img/img1.png";
 
-const News = {
+export default {
     name: "News",
     components: {
-        Slider,
         NewsItem,
-        ButtonBack,
+        Slider,
     },
     data() {
         return {
@@ -50,7 +46,7 @@ const News = {
                     views: 120,
                     like: 600,
                     dislike: 400,
-                    background: image2,
+                    background: image1,
                     id: 2,
                 },
                 {
@@ -60,26 +56,21 @@ const News = {
                     views: 120,
                     like: 600,
                     dislike: 400,
-                    background: image2,
-                    id: 3,
-                },
-                {
-                    date: "29 марта 2021",
-                    description:
-                        "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
-                    views: 120,
-                    like: 600,
-                    dislike: 400,
                     background: image1,
-                    id: 4,
+                    id: 3,
                 },
             ],
         };
     },
+    computed: {
+        showSlider() {
+            return this.$route.fullPath == "/mobile/news";
+        },
+    },
     methods: {
         clickNews(index) {
             this.$router.push({
-                name: "newsId",
+                name: "Post",
                 params: {
                     id: index,
                 },
@@ -87,34 +78,12 @@ const News = {
         },
     },
 };
-export default News;
 </script>
 
 <style scoped>
-.btn {
-    position: absolute;
-    top: 95px;
-    left: 27px;
-    width: 61px;
-    height: 19px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-}
 .container {
-    position: relative;
-    width: 940px;
+    padding: 0 23px;
+    max-width: 600px;
     margin: 0 auto;
-    background: #ffffff;
-    border-radius: 0px 0px 13px 13px;
-    padding: 0px 20px 30px 20px;
-    margin-top: 1px;
-    margin-bottom: 60px;
-}
-.news-blog {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
 }
 </style>

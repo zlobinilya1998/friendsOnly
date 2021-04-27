@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/desktop/Header";
+import Footer from "../components/desktop/Footer";
 
 let DesktopLayout = {
     components: {
