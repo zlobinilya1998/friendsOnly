@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <svg
+            @click="scrollTop"
             class="arrow-up"
             width="47"
             height="47"
@@ -110,6 +111,14 @@ const NewsOpen = {
             },
         ],
     }),
+    methods: {
+        scrollTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        },
+    },
 };
 export default NewsOpen;
 </script>
@@ -122,13 +131,13 @@ export default NewsOpen;
 .arrow-up {
     cursor: pointer;
     position: fixed;
-    top: 100px;
+    bottom: 185px;
     right: 0;
     transform: translateX(-50%);
 }
 .like-bar {
     position: fixed;
-    top: 150px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     height: 65px;
@@ -157,7 +166,14 @@ export default NewsOpen;
 }
 .title {
     margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 165%;
+    color: #292941;
 }
 .text {
+    font-size: 16px;
+    line-height: 165%;
+    color: #292941;
 }
 </style>

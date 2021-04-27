@@ -97,5 +97,7 @@ img {
     padding: 0;
     margin: 0;
     height: auto;
+    width: 100%;
+    object-fit: contain;
 }
 </style>

@@ -20,48 +20,47 @@ import Slider from "../../components/mobile/Slider";
 
 import image1 from "../../../public/img/img1.png";
 
-export default {
+const News = {
     name: "News",
     components: {
         NewsItem,
         Slider,
     },
-    data() {
-        return {
-            news: [
-                {
-                    date: "29 марта 2021",
-                    description:
-                        "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
-                    views: 120,
-                    like: 600,
-                    dislike: 400,
-                    background: image1,
-                    id: 1,
-                },
-                {
-                    date: "29 марта 2021",
-                    description:
-                        "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
-                    views: 120,
-                    like: 600,
-                    dislike: 400,
-                    background: image1,
-                    id: 2,
-                },
-                {
-                    date: "29 марта 2021",
-                    description:
-                        "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
-                    views: 120,
-                    like: 600,
-                    dislike: 400,
-                    background: image1,
-                    id: 3,
-                },
-            ],
-        };
-    },
+    data: () => ({
+        news: [
+            {
+                date: "29 марта 2021",
+                description:
+                    "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                views: 120,
+                like: 600,
+                dislike: 400,
+                background: image1,
+                id: 1,
+            },
+            {
+                date: "29 марта 2021",
+                description:
+                    "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                views: 120,
+                like: 600,
+                dislike: 400,
+                background: image1,
+                id: 2,
+            },
+            {
+                date: "29 марта 2021",
+                description:
+                    "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                views: 120,
+                like: 600,
+                dislike: 400,
+                background: image1,
+                id: 3,
+            },
+        ],
+    }),
+
     computed: {
         showSlider() {
             return this.$route.fullPath == "/mobile/news";
@@ -78,6 +77,7 @@ export default {
         },
     },
 };
+export default News;
 </script>
 
 <style scoped>

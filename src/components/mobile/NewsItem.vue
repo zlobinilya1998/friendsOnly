@@ -156,10 +156,7 @@ p {
         #000000 100%
     );
 }
-.item-background {
-    object-fit: cover;
-    width: 100%;
-}
+
 .text-content {
     display: flex;
     flex-direction: column;
