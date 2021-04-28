@@ -119,7 +119,7 @@ export default Comments;
 .comments-wrapper {
     bottom: 0;
     max-width: 600px;
-    height: 50vh;
+    height: 54vh;
     position: absolute;
     background: #ffffff;
     border-radius: 13px 13px 0px 0px;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header :showInput="false" :showMenu="false" :showBurgerMenu="true" />
-        <router-link v-slot="{ navigate }" to="/desktop">
+        <router-link custom v-slot="{ navigate }" to="/desktop">
             <div class="btn" @click="navigate">
                 <svg
                     width="5"
@@ -31,7 +31,7 @@
                     :style="{
                         background: `linear-gradient(180deg, rgba(0, 0, 0, 0.535677) 0%, rgba(0, 0, 0, 0.85) 100%)`,
                     }"
-                    :class="`item ${activeBtn == index ? 'active' : ''}`"
+                    :class="`slider-item ${activeBtn == index ? 'active' : ''}`"
                     v-on:click="activeBtn = index"
                 >
                     {{ btn }}
@@ -131,7 +131,7 @@ export default News;
     display: flex;
     align-items: center;
 }
-.item {
+.slider-item {
     height: 41px;
     cursor: pointer;
     padding: 12px 15px 13px;
@@ -142,10 +142,10 @@ export default News;
     color: #ffffff;
     transition: all 0.5s ease;
 }
-.item:nth-child(n + 2) {
+.slider-item:nth-child(n + 2) {
     margin-left: 8px;
 }
-.item.active {
+.slider-item.active {
     background: #469bfc !important;
 }
 .btn {

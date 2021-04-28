@@ -144,7 +144,6 @@ export default NewsLayout;
 <style scoped>
 .content {
     max-width: 600px;
-    min-height: 100vh;
     margin: 0 auto;
 }
 h5 {

@@ -145,7 +145,6 @@ export default NewsOpen;
     flex-direction: row;
     background: #ffffff;
     border: 1.5px solid rgba(0, 0, 0, 0.05);
-    box-sizing: border-box;
     border-radius: 15px;
 }
 

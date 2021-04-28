@@ -1,6 +1,6 @@
 <template>
     <div class="like-bar">
-        <div class="item">
+        <div class="like-item">
             <svg
                 width="20"
                 height="20"
@@ -27,7 +27,7 @@
                 </defs>
             </svg>
         </div>
-        <div class="item">
+        <div class="like-item">
             <svg
                 width="20"
                 height="20"
@@ -57,7 +57,7 @@
                 </defs>
             </svg>
         </div>
-        <div class="item">
+        <div class="like-item">
             <svg
                 width="20"
                 height="20"
@@ -72,7 +72,7 @@
                 />
             </svg>
         </div>
-        <div class="item">
+        <div class="like-item">
             <svg
                 width="20"
                 height="20"
@@ -87,7 +87,7 @@
                 />
             </svg>
         </div>
-        <div class="item">
+        <div class="like-item">
             <svg
                 width="26"
                 height="21"
@@ -141,7 +141,7 @@ export default LikeBar;
     justify-content: space-between;
     align-items: center;
 }
-.item {
+.like-item {
     height: 82px;
     width: 100%;
     display: flex;
@@ -149,7 +149,7 @@ export default LikeBar;
     justify-content: center;
     cursor: pointer;
 }
-.item:not(:last-child) {
+.like-item:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
 </style>
