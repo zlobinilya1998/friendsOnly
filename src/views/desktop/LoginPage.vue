@@ -39,7 +39,7 @@
         <div class="img-wrapper">
             <img src="../../../public/img/login.png" />
         </div>
-        <p class="text-bottom">2021 Only Fans For</p>
+        <p v-if="!messageSuccessFully" class="text-bottom">2021 Only Fans For</p>
     </div>
 </template>
 
@@ -82,7 +82,10 @@ textarea,
 button {
     font-family: "Roboto";
 }
-
+textarea {
+    min-width: 100%;
+    max-width: 100%;
+}
 .container-inner {
     padding: 40px 0;
     min-height: 100vh;
@@ -116,6 +119,8 @@ button {
     margin-left: 18px;
 }
 .text-wrapper {
+    margin-top: 55px;
+
     text-align: center;
 }
 .text:nth-child(1) {

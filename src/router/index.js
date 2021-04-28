@@ -16,6 +16,7 @@ const MobileNewsOpen = () => import("../views/mobile/NewsOpen.vue");
 const Comments = () => import("../views/mobile/Comments.vue");
 
 const routes = [
+    { path: "/", redirect: "/desktop/work" },
     { path: "/desktop", redirect: "/desktop/work" },
     {
         path: "/desktop/work",
