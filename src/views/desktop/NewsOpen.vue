@@ -145,10 +145,10 @@
                         </p>
                     </div>
                     <div class="img-wrapper">
-                        <img class="blog-img" src="../../../public/img/NewsOpen1.png" />
+                        <img class="blog-img" src="@/../public/img/NewsOpen1.png" />
                     </div>
                     <div class="text-wrapper">
-                        <h4>Николь Морен</h4>
+                        <h4 class="blog-title">Николь Морен</h4>
                         <p class="blog-text">
                             8-летняя Николь Луиза Морен 30 июля 1985 года находилась в своем доме в
                             Торонто вместе с матерью. Семья жила в престижном районе города Этобико,
@@ -158,7 +158,7 @@
                         </p>
                     </div>
                     <div class="img-wrapper">
-                        <img class="blog-img" src="../../../public/img/NewsOpen2.png" />
+                        <img class="blog-img" src="@/../public/img/NewsOpen2.png" />
                     </div>
                     <div class="text-wrapper">
                         <p class="blog-text">
@@ -347,6 +347,141 @@
                     </filter>
                 </defs>
             </svg>
+            <div class="container">
+                <div class="comments-wrapper">
+                    <p class="comments-count">{{ commentsCount }} комментариев</p>
+                    <div class="input-wrapper">
+                        <input class="input" v-model="input" placeholder="Написать комментарий" />
+                        <svg
+                            opacity=".5"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <g>
+                                <path
+                                    d="M22.5707 9.33375L3.20688 0.20324C2.39112 -0.181455 1.46951 -0.0122255 0.801771 0.644664C0.134036 1.30166 -0.145246 2.31395 0.0730043 3.28645L1.79655 10.9671H10.2353C10.6236 10.9671 10.9385 11.3249 10.9385 11.7662C10.9385 12.2075 10.6236 12.5653 10.2353 12.5653H1.79655L0.0730043 20.2459C-0.145246 21.2184 0.133989 22.2307 0.801771 22.8877C1.47087 23.5459 2.39257 23.713 3.20693 23.3291L22.5707 14.1986C23.4524 13.7829 24 12.8509 24 11.7662C24 10.6815 23.4524 9.7494 22.5707 9.33375Z"
+                                    fill="url(#paint0_linear)"
+                                />
+                            </g>
+                            <defs>
+                                <linearGradient
+                                    id="paint0_linear"
+                                    x1="-8.18183"
+                                    y1="-8.72728"
+                                    x2="27.2728"
+                                    y2="29.4546"
+                                    gradientUnits="userSpaceOnUse"
+                                >
+                                    <stop stop-color="#499DFC" />
+                                    <stop offset="1" stop-color="#72B3FB" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div v-for="comment of comments" :key="comment.id" class="comment">
+                        <svg
+                            width="38"
+                            height="38"
+                            viewBox="0 0 38 38"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                        >
+                            <circle cx="19" cy="19" r="19" fill="url(#pattern0)" />
+                            <defs>
+                                <pattern
+                                    id="pattern0"
+                                    patternContentUnits="objectBoundingBox"
+                                    width="1"
+                                    height="1"
+                                >
+                                    <use xlink:href="#image0" transform="scale(0.00226244)" />
+                                </pattern>
+                            </defs>
+                        </svg>
+
+                        <div class="content">
+                            <div class="comment-text-wrapper">
+                                <p @click="userAnswer(comment.name)" class="text-name">
+                                    {{ comment.name }}
+                                </p>
+                                <p class="text-description">
+                                    {{ comment.text }}
+                                    <span class="comment-time"> {{ comment.time }}ч.</span>
+                                </p>
+
+                                <div
+                                    v-if="comment.answers"
+                                    @click="comment.showAnswers = !comment.showAnswers"
+                                    class="answers"
+                                    :style="{
+                                        borderLeft: comment.showAnswers
+                                            ? '1px solid black'
+                                            : 'none',
+                                        borderRadius: '3px',
+                                        paddingLeft: comment.showAnswers ? '8px' : '0px',
+                                    }"
+                                >
+                                    <div v-if="comment.showAnswers">
+                                        <p
+                                            class="answer"
+                                            v-for="(answer, index) of comment.answers"
+                                            :key="index"
+                                        >
+                                            {{ answer }}
+                                        </p>
+                                    </div>
+                                    {{
+                                        comment.showAnswers
+                                            ? `Скрыть`
+                                            : `Показать ответы (${comment.answers.length})`
+                                    }}
+                                    <svg
+                                        :style="{
+                                            transform: comment.showAnswers ? `rotate(180deg)` : '',
+                                        }"
+                                        class="answers-arrow"
+                                        width="8"
+                                        height="5"
+                                        viewBox="0 0 8 5"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            opacity="0.5"
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M7.21781 1.27152L4.03583 4.4535C3.84057 4.64876 3.52399 4.64876 3.32872 4.4535L0.146743 1.27152C-0.0485191 1.07626 -0.0485191 0.759677 0.146743 0.564415C0.342006 0.369153 0.658588 0.369153 0.85385 0.564415L3.68228 3.39284L6.5107 0.564415C6.70597 0.369153 7.02255 0.369153 7.21781 0.564415C7.41307 0.759677 7.41307 1.07626 7.21781 1.27152Z"
+                                            fill="#292941"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="like-wrapper">
+                                <svg
+                                    @click="comment.liked = !comment.liked"
+                                    width="19"
+                                    :style="{ cursor: 'pointer' }"
+                                    height="17"
+                                    viewBox="0 0 19 17"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        :opacity="comment.liked ? '1' : '0.1'"
+                                        d="M13.81 1.306C13.0336 0.463829 11.9681 0 10.8097 0C9.94389 0 9.15092 0.273743 8.45284 0.81356C8.10059 1.08604 7.78141 1.41941 7.5 1.80851C7.2187 1.41953 6.89941 1.08604 6.54705 0.81356C5.84908 0.273743 5.05611 0 4.19025 0C3.03188 0 1.96632 0.463829 1.18984 1.306C0.42263 2.13833 0 3.27541 0 4.50794C0 5.77652 0.472755 6.93775 1.48773 8.1625C2.39571 9.25804 3.70068 10.3702 5.21187 11.658C5.72788 12.0978 6.31279 12.5963 6.92013 13.1273C7.08057 13.2678 7.28645 13.3452 7.5 13.3452C7.71343 13.3452 7.91943 13.2678 8.07964 13.1275C8.68698 12.5964 9.27223 12.0977 9.78848 11.6576C11.2994 10.3701 12.6044 9.25804 13.5124 8.16238C14.5274 6.93775 15 5.77652 15 4.50783C15 3.27541 14.5774 2.13833 13.81 1.306Z"
+                                        :fill="comment.liked ? '#469BFC' : 'grey'"
+                                    />
+                                </svg>
+                                <p v-if="comment.like" class="like-count">{{ comment.like }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -363,22 +498,83 @@ const NewsOpen = {
         NewsItem,
         Header,
     },
-    data() {
-        return {
-            img: image1,
-            news: [
-                {
-                    date: "29 марта 2021",
-                    description:
-                        "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
-                    views: 120,
-                    like: 600,
-                    dislike: 400,
-                    background: image1,
-                    id: 1,
-                },
-            ],
-        };
+    data: () => ({
+        input: "",
+        img: image1,
+        news: [
+            {
+                date: "29 марта 2021",
+                description:
+                    "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                views: 120,
+                like: 600,
+                dislike: 400,
+                background: image1,
+                id: 1,
+            },
+        ],
+        comments: [
+            {
+                name: "petr.nikolaevi4",
+                avatar: "",
+                text: "сколько такой диван в долларах",
+                like: 15,
+                liked: false,
+                answers: ["Ответ1", "Ответ2"],
+                time: 4,
+                id: 0,
+                showAnswers: false,
+            },
+            {
+                name: "n1kola3vi4",
+                avatar: "",
+                text: "Как узнать правильный ответ?",
+                like: 54,
+                time: 4,
+                answers: ["Я думаю да"],
+                id: 1,
+                liked: true,
+                showAnswers: false,
+            },
+            {
+                name: "petr.nikolaevi4",
+                avatar: "",
+                text: "сколько такой диван в долларах",
+                like: 0,
+                time: 4,
+                liked: false,
+                id: 2,
+                showAnswers: false,
+            },
+            {
+                name: "petr.nikolaevi4",
+                avatar: "",
+                text: "сколько такой диван в долларах",
+                like: 0,
+                liked: true,
+                time: 4,
+                id: 3,
+                showAnswers: false,
+            },
+            {
+                name: "dima",
+                avatar: "",
+                text: "Как вас найти?",
+                liked: false,
+                like: 0,
+                time: 4,
+                id: 4,
+                showAnswers: false,
+            },
+        ],
+    }),
+    computed: {
+        commentsCount() {
+            return this.comments.length;
+        },
+        postId() {
+            return this.$route.params.post;
+        },
     },
     methods: {
         scrollTop() {
@@ -386,6 +582,9 @@ const NewsOpen = {
                 top: 0,
                 behavior: "smooth",
             });
+        },
+        userAnswer(user) {
+            this.input = `Ответ ${user} `;
         },
     },
 };
@@ -402,6 +601,7 @@ export default NewsOpen;
     width: 700px;
     margin: 0 auto;
     background: #ffffff;
+    border-radius: 25px;
 }
 .btn {
     position: absolute;
@@ -485,6 +685,7 @@ export default NewsOpen;
     flex-direction: column;
 }
 .date {
+    color: #ffffff;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -493,6 +694,10 @@ export default NewsOpen;
 }
 .description {
     margin-top: 3px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 135%;
+    color: #ffffff;
 }
 .rating {
     margin-top: 14px;
@@ -506,6 +711,8 @@ export default NewsOpen;
     font-weight: bold;
     font-size: 16px;
     line-height: 150%;
+    color: #ffffff;
+    opacity: 0.5;
 }
 .like-blog {
     display: flex;
@@ -517,6 +724,8 @@ export default NewsOpen;
     font-weight: bold;
     font-size: 16px;
     line-height: 150%;
+    color: #ffffff;
+    opacity: 0.5;
 }
 .dislike {
     display: flex;
@@ -526,6 +735,8 @@ export default NewsOpen;
     font-weight: bold;
     font-size: 16px;
     line-height: 150%;
+    color: #ffffff;
+    opacity: 0.5;
 }
 .views > svg,
 .like > svg,
@@ -537,10 +748,22 @@ export default NewsOpen;
 }
 .text-wrapper {
     padding: 0px 60px 0px 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 185%;
+    color: #292941;
 }
 .img-wrapper {
     min-height: 523px;
     margin: 30px 0px;
+}
+.blog-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 165%;
+    color: #292941;
 }
 .blog-text {
     margin-top: 15px;
@@ -554,5 +777,121 @@ export default NewsOpen;
     top: 75vh;
     right: 41px;
     transform: translateX(50%);
+}
+.comments-wrapper {
+    margin: 50px 0px 40px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 25px;
+}
+
+.comments-count {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    color: #292941;
+}
+
+.input-wrapper {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+}
+.input-wrapper > svg {
+    cursor: pointer;
+}
+.input-wrapper > svg > g {
+    transition: all 0.3s ease;
+}
+.input {
+    min-height: 60px;
+    background: #f7f7f9;
+    border: 1px solid #ffffff;
+    border-radius: 50px;
+    flex: 1;
+    margin-right: 25px;
+    padding: 18px 30px;
+    text-align: left;
+}
+.input::placeholder {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #292941;
+    opacity: 0.5;
+}
+.comment {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+}
+.comment:nth-child(3) {
+    margin-top: 30px;
+}
+.comment-time {
+    opacity: 0.5;
+}
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15px;
+}
+.comment-text-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.text-name {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #292941;
+    opacity: 0.5;
+}
+.text-description {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    color: #292941;
+}
+.like-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.like-count {
+    margin-top: 7px;
+    opacity: 0.3;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+}
+.answers {
+    cursor: pointer;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #292941;
+    opacity: 0.5;
+}
+.answers-arrow {
+    margin-left: 6px;
+}
+.answer {
+    margin-top: 4px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    opacity: 0.5;
 }
 </style>
