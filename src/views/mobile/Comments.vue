@@ -18,7 +18,7 @@
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <g :opacity="svgOpacity">
+                <g>
                     <path
                         d="M22.5707 9.33375L3.20688 0.20324C2.39112 -0.181455 1.46951 -0.0122255 0.801771 0.644664C0.134036 1.30166 -0.145246 2.31395 0.0730043 3.28645L1.79655 10.9671H10.2353C10.6236 10.9671 10.9385 11.3249 10.9385 11.7662C10.9385 12.2075 10.6236 12.5653 10.2353 12.5653H1.79655L0.0730043 20.2459C-0.145246 21.2184 0.133989 22.2307 0.801771 22.8877C1.47087 23.5459 2.39257 23.713 3.20693 23.3291L22.5707 14.1986C23.4524 13.7829 24 12.8509 24 11.7662C24 10.6815 23.4524 9.7494 22.5707 9.33375Z"
                         fill="url(#paint0_linear)"
@@ -80,6 +80,22 @@ const Comments = {
                 time: 4,
                 id: 2,
             },
+            {
+                name: "petr.nikolaevi4",
+                avatar: "",
+                text: "сколько такой диван в долларах",
+                like: 0,
+                time: 4,
+                id: 3,
+            },
+            {
+                name: "petr.nikolaevi4",
+                avatar: "",
+                text: "сколько такой диван в долларах",
+                like: 0,
+                time: 4,
+                id: 4,
+            },
         ],
     }),
     computed: {
@@ -103,13 +119,16 @@ export default Comments;
 .comments-wrapper {
     bottom: 0;
     max-width: 600px;
+    height: 50vh;
     position: absolute;
     background: #ffffff;
     border-radius: 13px 13px 0px 0px;
-    padding: 25px 23px 60px 23px;
+    padding: 25px 23px 0 23px;
     overflow: auto;
 }
-
+.comments-wrapper::-webkit-scrollbar {
+    display: none;
+}
 .comments-count {
     position: relative;
     margin-bottom: 20px;
@@ -124,9 +143,10 @@ export default Comments;
 
 .input-wrapper {
     position: fixed;
-    min-height: 65px;
-    bottom: 0px;
-    left: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 600px;
     width: 100%;
     display: flex;
     justify-content: space-between;

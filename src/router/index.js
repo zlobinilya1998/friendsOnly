@@ -7,7 +7,6 @@ Vue.use(VueRouter);
 const Work = () => import("../views/desktop/Work.vue");
 const News = () => import("../views/desktop/News.vue");
 const NewsOpen = () => import("../views/desktop/NewsOpen.vue");
-const Login = () => import("../views/desktop/LoginPage.vue");
 
 //mobile
 const Vacancy = () => import("../views/mobile/Vacancy.vue");
@@ -25,14 +24,6 @@ const routes = [
         },
         component: Work,
     },
-    {
-        path: "/desktop/login",
-        component: Login,
-        meta: {
-            layout: "login",
-        },
-    },
-
     {
         path: "/desktop/news",
         meta: {

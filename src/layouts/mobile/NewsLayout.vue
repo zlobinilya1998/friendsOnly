@@ -144,6 +144,7 @@ export default NewsLayout;
 <style scoped>
 .content {
     max-width: 600px;
+    min-height: 100vh;
     margin: 0 auto;
 }
 h5 {
@@ -179,6 +180,7 @@ p {
 }
 .news-background {
     position: relative;
+    height: 50vh;
 }
 .btn {
     position: absolute;

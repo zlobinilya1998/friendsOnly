@@ -157,13 +157,8 @@ export default NewsOpen;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-height: 280px;
 }
-.img {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-}
+
 .title {
     margin-bottom: 15px;
     font-weight: bold;

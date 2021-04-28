@@ -129,6 +129,7 @@ p {
 }
 
 .item {
+    border-radius: 8px;
     cursor: pointer;
     margin-top: 15px;
     display: flex;
