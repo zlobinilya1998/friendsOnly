@@ -61,7 +61,7 @@
                 </p>
             </div>
             <div class="img-wrapper">
-                <img class="img" src="../../../public/img/NewsOpen1.png" />
+                <img class="img" src="@/../public/img/NewsOpen1.png" />
             </div>
             <div class="container-inner">
                 <h4 class="title">{{ item.title }}</h4>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import LikeBar from "../../components/desktop/LikeBar";
+import LikeBar from "@/components/desktop/LikeBar";
 const NewsOpen = {
     name: "NewsOpen",
     components: {

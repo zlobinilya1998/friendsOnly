@@ -3,7 +3,7 @@
         <div class="news-background">
             <div class="item-shadow"></div>
 
-            <img :src="img" />
+            <img :src="img" class="item-img" />
             <router-link class="btn" to="/mobile/news">
                 <svg
                     class="btn-icon"
@@ -164,12 +164,12 @@ p {
     opacity: 0.5;
 }
 .item-shadow {
+    border-radius: 0px 0px 20px 20px;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
     opacity: 0.5;
     background: linear-gradient(
         180deg,
@@ -177,6 +177,9 @@ p {
         rgba(0, 0, 0, 0.630208) 58.33%,
         #000000 100%
     );
+}
+.item-img {
+    border-radius: 0px 0px 20px 20px;
 }
 .news-background {
     position: relative;

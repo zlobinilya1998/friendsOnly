@@ -105,6 +105,7 @@ img {
     margin: 0;
     width: 100%;
     min-height: 100%;
+    height: 100%;
     -o-object-fit: contain;
     object-fit: cover;
 }
