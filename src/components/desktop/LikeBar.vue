@@ -8,7 +8,7 @@
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <g clip-path="url(#clip5)">
+                <g clip-path="url(#clip10)">
                     <path
                         d="M1.45833 19.1655H3.54167C4.34583 19.1655 5 18.5114 5 17.7072V8.12386C5 7.31969 4.34583 6.66553 3.54167 6.66553H1.45833C0.654167 6.66553 0 7.31969 0 8.12386V17.7072C0 18.5114 0.654167 19.1655 1.45833 19.1655Z"
                         fill="#292941"
@@ -21,7 +21,7 @@
                     />
                 </g>
                 <defs>
-                    <clipPath id="clip5">
+                    <clipPath id="clip10">
                         <rect width="20" height="20" fill="white" />
                     </clipPath>
                 </defs>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Header :showInput="false" :showMenu="false" :showBurgerMenu="true" />
         <ButtonBack route="desktop" />
         <div class="container">
             <Slider />
@@ -16,12 +17,13 @@
 </template>
 
 <script>
-import Slider from "../../components/desktop/Slider";
-import NewsItem from "../../components/desktop/NewsItem";
-import ButtonBack from "../../components/desktop/btn/ButtonBack";
+import Header from "@/components/desktop/Header";
+import Slider from "@/components/desktop/Slider";
+import NewsItem from "@/components/desktop/NewsItem";
+import ButtonBack from "@/components/desktop/btn/ButtonBack";
 
-import image1 from "../../../public/img/img1.png";
-import image2 from "../../../public/img/img2.png";
+import image1 from "@/../public/img/img1.png";
+import image2 from "@/../public/img/img2.png";
 
 const News = {
     name: "News",
@@ -29,6 +31,7 @@ const News = {
         Slider,
         NewsItem,
         ButtonBack,
+        Header,
     },
     data() {
         return {

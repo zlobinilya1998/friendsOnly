@@ -1,5 +1,6 @@
 <template>
-    <main>
+    <div>
+        <Header />
         <div class="container">
             <div class="about">
                 <h2 class="about__title">
@@ -68,12 +69,16 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
-const Main = {
-    name: "Main",
+import Header from "@/components/desktop/Header";
+const Work = {
+    name: "Work",
+    components: {
+        Header,
+    },
     data() {
         return {
             cards: [
@@ -109,7 +114,7 @@ const Main = {
         };
     },
 };
-export default Main;
+export default Work;
 </script>
 
 <style scoped>

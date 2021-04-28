@@ -63,7 +63,7 @@ const News = {
 
     computed: {
         showSlider() {
-            return this.$route.fullPath == "/mobile/news";
+            return this.$route.fullPath === "/mobile/news";
         },
     },
     methods: {

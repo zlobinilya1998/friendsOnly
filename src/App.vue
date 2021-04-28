@@ -6,12 +6,14 @@
 import DesktopLayout from "./layouts/desktop/DesktopLayout.vue";
 import MobileLayout from "./layouts/mobile/MobileLayout.vue";
 import NewsLayout from "./layouts/mobile/NewsLayout.vue";
+import LoginLayout from "@/layouts/desktop/LoginLayout.vue";
 
 const App = {
     components: {
         DesktopLayout,
         MobileLayout,
         NewsLayout,
+        LoginLayout,
     },
     computed: {
         layout() {
@@ -56,6 +58,7 @@ body {
 }
 button {
     cursor: pointer;
+    border: none;
 }
 button:focus {
     outline: none;
@@ -93,11 +96,18 @@ input {
 input:focus {
     outline: none;
 }
+textarea {
+    font-family: "SF Pro Display-Regular";
+}
+textarea:focus {
+    outline: none;
+}
 img {
     padding: 0;
     margin: 0;
-    height: auto;
     width: 100%;
-    object-fit: contain;
+    min-height: 100%;
+    -o-object-fit: contain;
+    object-fit: cover;
 }
 </style>

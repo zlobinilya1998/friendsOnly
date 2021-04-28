@@ -180,9 +180,6 @@ p {
 .news-background {
     position: relative;
 }
-.news-background > img {
-    object-fit: contain;
-}
 .btn {
     position: absolute;
     left: 23px;

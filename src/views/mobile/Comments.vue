@@ -12,8 +12,6 @@
         <div class="input-wrapper">
             <input class="input" v-model="input" placeholder="Написать комментарий" />
             <svg
-                @mouseenter="svgOpacity = 1"
-                @mouseleave="svgOpacity = 0.5"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -53,7 +51,6 @@ const Comments = {
     },
     data: () => ({
         input: "",
-        svgOpacity: 0.5,
         comments: [
             {
                 name: "petr.nikolaevi4",

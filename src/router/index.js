@@ -4,9 +4,10 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 //desktop
-const Main = () => import("../components/desktop/Main.vue");
+const Work = () => import("../views/desktop/Work.vue");
 const News = () => import("../views/desktop/News.vue");
 const NewsOpen = () => import("../views/desktop/NewsOpen.vue");
+const Login = () => import("../views/desktop/LoginPage.vue");
 
 //mobile
 const Vacancy = () => import("../views/mobile/Vacancy.vue");
@@ -15,14 +16,22 @@ const MobileNewsOpen = () => import("../views/mobile/NewsOpen.vue");
 const Comments = () => import("../views/mobile/Comments.vue");
 
 const routes = [
-    { path: "/", redirect: "/desktop" },
+    { path: "/desktop", redirect: "/desktop/work" },
     {
-        path: "/desktop",
+        path: "/desktop/work",
         meta: {
             layout: "desktop",
         },
-        component: Main,
+        component: Work,
     },
+    {
+        path: "/desktop/login",
+        component: Login,
+        meta: {
+            layout: "login",
+        },
+    },
+
     {
         path: "/desktop/news",
         meta: {
@@ -66,7 +75,6 @@ const routes = [
     },
     { path: "/mobile/comments", meta: { layout: "news" }, component: Comments },
 ];
-
 const router = new VueRouter({
     mode: "history",
     routes,

@@ -44,7 +44,7 @@
                     FRIENDSONLY <span>{{ headerTitle }}</span>
                 </p>
             </div>
-            <div class="header__container__input__wrapper">
+            <div v-if="showInput" class="header__container__input__wrapper">
                 <input class="header__container__input" placeholder="Поиск аккаунтов" />
                 <svg
                     class="header__container__input__img"
@@ -69,7 +69,7 @@
                     </defs>
                 </svg>
             </div>
-            <ul class="header__container__menu">
+            <ul v-if="showMenu" class="header__container__menu">
                 <li>
                     <a href="#">
                         <svg
@@ -218,6 +218,19 @@
                     </li>
                 </div>
             </ul>
+            <svg
+                :style="{ cursor: 'pointer' }"
+                v-if="showBurgerMenu"
+                width="28"
+                height="22"
+                viewBox="0 0 28 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <rect width="28" height="4" rx="1" fill="black" fill-opacity="0.1" />
+                <rect y="9" width="28" height="4" rx="1" fill="black" fill-opacity="0.1" />
+                <rect y="18" width="28" height="4" rx="1" fill="black" fill-opacity="0.1" />
+            </svg>
         </div>
     </header>
 </template>
@@ -225,6 +238,20 @@
 <script>
 const Header = {
     name: "Header",
+    props: {
+        showInput: {
+            type: Boolean,
+            default: true,
+        },
+        showMenu: {
+            type: Boolean,
+            default: true,
+        },
+        showBurgerMenu: {
+            type: Boolean,
+            default: false,
+        },
+    },
     computed: {
         headerTitle() {
             return this.$route.path.includes("news") ? "NEWS" : "WORK";
