@@ -305,6 +305,7 @@
                 <svg
                     @click="scrollTop"
                     class="arrow-up"
+                    id="arrow-up"
                     width="54"
                     height="54"
                     viewBox="0 0 54 54"
@@ -505,6 +506,7 @@ const NewsOpen = {
         Header,
     },
     data: () => ({
+        lastScrollTop: 0,
         input: "",
         img: image1,
         news: [
@@ -592,6 +594,21 @@ const NewsOpen = {
         userAnswer(user) {
             this.input = `Ответ ${user} `;
         },
+        handleScroll() {
+            let pageY = window.pageYOffset;
+            if (pageY > this.lastScrollTop) {
+                document.getElementById("arrow-up").style.display = "block";
+            } else {
+                document.getElementById("arrow-up").style.display = "none";
+            }
+            this.lastScrollTop = pageY;
+        },
+    },
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    beforeDestroy() {
+        window.removeEventListener("scroll", this.handleScroll);
     },
 };
 export default NewsOpen;
@@ -783,6 +800,7 @@ export default NewsOpen;
     top: 70vh;
     transform: translateX(-15px);
     cursor: pointer;
+    transition: all 0.3s ease-in;
 }
 .comments-wrapper {
     margin: 50px 0px 40px;

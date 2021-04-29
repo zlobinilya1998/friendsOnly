@@ -247,7 +247,7 @@ const NewsOpen = {
                 document.getElementById("menu").style.bottom = "-300px";
                 document.getElementById("menu").style.opacity = "0";
             } else {
-                document.getElementById("menu").style.bottom = "100px";
+                document.getElementById("menu").style.bottom = "50px";
                 document.getElementById("menu").style.opacity = "1";
             }
             this.lastScrollTop = pageY;
@@ -300,7 +300,7 @@ export default NewsOpen;
 }
 .like-bar {
     position: fixed;
-    bottom: 100px;
+    bottom: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
