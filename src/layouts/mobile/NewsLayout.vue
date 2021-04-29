@@ -54,7 +54,11 @@
                         {{ item.views }}K
                     </p>
                     <div class="like-blog">
-                        <p class="like">
+                        <p
+                            class="like"
+                            @click="clickOnLike"
+                            :style="{ opacity: liked ? '1' : '0.5' }"
+                        >
                             <svg
                                 width="13"
                                 height="13"
@@ -78,9 +82,13 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            {{ item.like }}
+                            {{ likeCount }}
                         </p>
-                        <p class="dislike">
+                        <p
+                            class="dislike"
+                            @click="clickOnDislike"
+                            :style="{ opacity: disliked ? '1' : '0.5' }"
+                        >
                             <svg
                                 width="13"
                                 height="13"
@@ -109,7 +117,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            {{ item.dislike }}
+                            {{ dislikeCount }}
                         </p>
                     </div>
                 </div>
@@ -126,6 +134,8 @@ const NewsLayout = {
     name: "NewsLayout",
 
     data: () => ({
+        liked: false,
+        disliked: false,
         img,
         item: {
             date: "29 марта 2021",
@@ -137,6 +147,36 @@ const NewsLayout = {
             id: 1,
         },
     }),
+    computed: {
+        likeCount() {
+            if (this.liked) {
+                return this.item.like + 1;
+            } else return this.item.like;
+        },
+        dislikeCount() {
+            if (this.disliked) {
+                return this.item.dislike + 1;
+            } else return this.item.dislike;
+        },
+    },
+    methods: {
+        clickOnLike() {
+            if (this.liked) {
+                this.liked = false;
+            } else {
+                this.disliked = false;
+                this.liked = true;
+            }
+        },
+        clickOnDislike() {
+            if (this.disliked) {
+                this.disliked = false;
+            } else {
+                this.liked = false;
+                this.disliked = true;
+            }
+        },
+    },
 };
 export default NewsLayout;
 </script>
@@ -240,10 +280,12 @@ p {
     display: flex;
 }
 .like {
+    cursor: pointer;
     display: flex;
     align-items: center;
 }
 .dislike {
+    cursor: pointer;
     display: flex;
     align-items: center;
     margin-left: 20px;
