@@ -53,7 +53,7 @@
                 </filter>
             </defs>
         </svg>
-        <div class="like-bar">
+        <div class="like-bar" id="menu">
             <div class="like-item">
                 <svg
                     width="20"
@@ -203,6 +203,7 @@
 const NewsOpen = {
     name: "NewsOpen",
     data: () => ({
+        lastScrollTop: 0,
         items: [
             {
                 description:
@@ -240,6 +241,23 @@ const NewsOpen = {
                 behavior: "smooth",
             });
         },
+        handleScroll() {
+            let pageY = window.pageYOffset;
+            if (pageY > this.lastScrollTop) {
+                document.getElementById("menu").style.bottom = "-300px";
+                document.getElementById("menu").style.opacity = "0";
+            } else {
+                document.getElementById("menu").style.bottom = "100px";
+                document.getElementById("menu").style.opacity = "1";
+            }
+            this.lastScrollTop = pageY;
+        },
+    },
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    beforeDestroy() {
+        window.removeEventListener("scroll", this.handleScroll);
     },
 };
 export default NewsOpen;
@@ -295,6 +313,7 @@ export default NewsOpen;
     background: #ffffff;
     border: 1.5px solid rgba(0, 0, 0, 0.05);
     border-radius: 15px;
+    transition: all 0.8s ease-in;
 }
 .like-item {
     height: 82px;

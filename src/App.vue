@@ -52,7 +52,6 @@ body {
     background: #f4f4f4;
     font-family: "SF Pro Display-Regular";
     color: hsla(240, 23%, 21%, 1);
-    min-height: 100vh;
 }
 button {
     cursor: pointer;
