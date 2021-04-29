@@ -26,25 +26,27 @@
         <div class="container">
             <div class="slider">
                 <div
-                    v-for="(btn, index) of sliderBtn"
-                    :key="index"
+                    v-for="(value, name) in testData"
+                    :key="name"
                     :style="{
-                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.535677) 0%, rgba(0, 0, 0, 0.85) 100%)`,
+                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),url(${
+                            testData[name][testData[name].length - 1].background
+                        })`,
                     }"
-                    :class="`slider-item ${activeBtn == index ? 'active' : ''}`"
-                    v-on:click="activeBtn = index"
+                    :class="`slider-item ${activeBtn == name ? 'active' : ''}`"
+                    v-on:click="activeBtn = name"
                 >
-                    {{ btn }}
+                    {{ name }}
                 </div>
             </div>
-            <div class="news-blog">
+            <transition-group name="list" tag="div" class="news-blog">
                 <NewsItem
-                    v-for="item in news"
+                    v-for="item in selectedNews"
                     :key="item.id"
                     :item="item"
                     @click.native="clickNews(item.id)"
                 />
-            </div>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -64,8 +66,97 @@ const News = {
     },
     data() {
         return {
-            activeBtn: 0,
-            sliderBtn: ["Все", "Для создателей", "Для друзей", "Обновления"],
+            testData: {
+                Все: [
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 600,
+                        dislike: 400,
+                        background: image1,
+                        id: 1,
+                    },
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 600,
+                        dislike: 400,
+                        background: image2,
+                        id: 2,
+                    },
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 200,
+                        dislike: 400,
+                        background: image2,
+                        id: 3,
+                    },
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 150,
+                        dislike: 400,
+                        background: image1,
+                        id: 4,
+                    },
+                ],
+                "Для друзей": [
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 600,
+                        dislike: 400,
+                        background: image1,
+                        id: 1,
+                    },
+                ],
+                "Для создателей": [
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 600,
+                        dislike: 400,
+                        background: image2,
+                        id: 2,
+                    },
+                ],
+                Обновления: [
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 200,
+                        dislike: 400,
+                        background: image2,
+                        id: 3,
+                    },
+                    {
+                        date: "29 марта 2021",
+                        description:
+                            "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
+                        views: 120,
+                        like: 150,
+                        dislike: 400,
+                        background: image1,
+                        id: 4,
+                    },
+                ],
+            },
+            activeBtn: "Все",
             news: [
                 {
                     date: "29 марта 2021",
@@ -92,7 +183,7 @@ const News = {
                     description:
                         "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
                     views: 120,
-                    like: 600,
+                    like: 200,
                     dislike: 400,
                     background: image2,
                     id: 3,
@@ -102,13 +193,18 @@ const News = {
                     description:
                         "Ясность нашей позиции очевидна: выбранный нами инновационный путь однозначно необходимость.",
                     views: 120,
-                    like: 600,
+                    like: 150,
                     dislike: 400,
                     background: image1,
                     id: 4,
                 },
             ],
         };
+    },
+    computed: {
+        selectedNews() {
+            return this.testData[this.activeBtn];
+        },
     },
     methods: {
         clickNews(index) {
@@ -135,10 +231,10 @@ export default News;
     height: 41px;
     cursor: pointer;
     padding: 12px 15px 13px;
+    display: flex;
+    align-items: center;
     border-radius: 50px;
     font-family: "Roboto";
-    flex: none;
-    align-items: center;
     color: #ffffff;
     transition: all 0.5s ease;
 }
@@ -173,5 +269,14 @@ export default News;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.3s ease;
+}
+.list-enter,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(20%);
 }
 </style>
