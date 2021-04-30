@@ -6,12 +6,14 @@
 import DesktopLayout from "./layouts/desktop/DesktopLayout.vue";
 import MobileLayout from "./layouts/mobile/MobileLayout.vue";
 import NewsLayout from "./layouts/mobile/NewsLayout.vue";
+import EmptyLayout from "@/layouts/mobile/EmptyLayout.vue";
 
 const App = {
     components: {
         DesktopLayout,
         MobileLayout,
         NewsLayout,
+        EmptyLayout,
     },
     computed: {
         layout() {

@@ -13,8 +13,10 @@ const Vacancy = () => import("@/views/mobile/Vacancy.vue");
 const MobileNews = () => import("@/views/mobile/News.vue");
 const MobileNewsOpen = () => import("@/views/mobile/NewsOpen.vue");
 const Comments = () => import("@/views/mobile/Comments.vue");
+const ProfileAnalytics = () => import("@/views/mobile/ProfileAnalytics.vue");
 
 const routes = [
+    //Desktop
     { path: "/", redirect: "/desktop/work" },
     { path: "/desktop", redirect: "/desktop/work" },
     {
@@ -39,6 +41,8 @@ const routes = [
         },
         component: NewsOpen,
     },
+
+    //Mobile
     {
         path: "/mobile",
         redirect: "/mobile/vacancy",
@@ -66,6 +70,11 @@ const routes = [
         component: MobileNewsOpen,
     },
     { path: "/mobile/comments", meta: { layout: "news" }, component: Comments },
+    {
+        path: "/mobile/profile",
+        meta: { layout: "empty" },
+    },
+    { path: "/mobile/profile/analytics", meta: { layout: "empty" }, component: ProfileAnalytics },
 ];
 const router = new VueRouter({
     mode: "history",
