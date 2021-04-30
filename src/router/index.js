@@ -4,15 +4,15 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 //desktop
-const Work = () => import("../views/desktop/Work.vue");
-const News = () => import("../views/desktop/News.vue");
-const NewsOpen = () => import("../views/desktop/NewsOpen.vue");
+const Work = () => import("@/views/desktop/Work.vue");
+const News = () => import("@/views/desktop/News.vue");
+const NewsOpen = () => import("@/views/desktop/NewsOpen.vue");
 
 //mobile
-const Vacancy = () => import("../views/mobile/Vacancy.vue");
-const MobileNews = () => import("../views/mobile/News.vue");
-const MobileNewsOpen = () => import("../views/mobile/NewsOpen.vue");
-const Comments = () => import("../views/mobile/Comments.vue");
+const Vacancy = () => import("@/views/mobile/Vacancy.vue");
+const MobileNews = () => import("@/views/mobile/News.vue");
+const MobileNewsOpen = () => import("@/views/mobile/NewsOpen.vue");
+const Comments = () => import("@/views/mobile/Comments.vue");
 
 const routes = [
     { path: "/", redirect: "/desktop/work" },

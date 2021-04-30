@@ -52,6 +52,7 @@ body {
     background: #f4f4f4;
     font-family: "SF Pro Display-Regular";
     color: hsla(240, 23%, 21%, 1);
+    overflow-x: hidden;
 }
 button {
     cursor: pointer;
@@ -107,5 +108,28 @@ img {
     height: 100%;
     -o-object-fit: contain;
     object-fit: cover;
+}
+.pageTotalLoad {
+    width: 225px;
+    height: 100%;
+    background: linear-gradient(
+        to left,
+        rgba(254, 255, 255, 0),
+        rgba(255, 255, 255, 0.55),
+        rgba(255, 255, 255, 1)
+    );
+    position: absolute;
+    left: 0;
+    z-index: 4;
+    -webkit-animation: loadingPageAnimation infinite 1.5s;
+    animation: loadingPageAnimation infinite 1.5s;
+}
+@keyframes loadingPageAnimation {
+    0% {
+        left: 0%;
+    }
+    100% {
+        left: 100%;
+    }
 }
 </style>

@@ -45,73 +45,83 @@
                     </p>
                 </section>
             </div>
-            <div class="vacanсy">
-                <div v-for="(card, index) in cards" :key="index" class="vacanсy__card">
-                    <h3 class="vacanсy__card__title">{{ card.title }}</h3>
-                    <hr />
-                    <section class="vacanсy__card__responsibilities">
-                        <h4 class="vacanсy__card__responsibilities__title">
-                            Обязанности
-                        </h4>
-                        <p class="vacanсy__card__responsibilities__text">
-                            {{ card.responsibilities }}
-                        </p>
-                    </section>
-                    <section class="vacanсy__card__qualification">
-                        <h4 class="vacanсy__card__qualification__title">
-                            Предпочтительная квалификация
-                        </h4>
-                        <p class="vacanсy__card__qualification__text">
-                            {{ card.qualification }}
-                        </p>
-                    </section>
-                    <button class="vacanсy__card__btn">Отклинуться на вакансию</button>
+            <transition name="fade">
+                <WorkPreload :cards="cards" v-if="loading" key="first" />
+                <div v-else key="second" class="vacanсy">
+                    <div v-for="(card, index) in cards" :key="index" class="vacanсy__card">
+                        <h3 class="vacanсy__card__title">{{ card.title }}</h3>
+                        <hr />
+                        <section class="vacanсy__card__responsibilities">
+                            <h4 class="vacanсy__card__responsibilities__title">
+                                Обязанности
+                            </h4>
+                            <p class="vacanсy__card__responsibilities__text">
+                                {{ card.responsibilities }}
+                            </p>
+                        </section>
+                        <section class="vacanсy__card__qualification">
+                            <h4 class="vacanсy__card__qualification__title">
+                                Предпочтительная квалификация
+                            </h4>
+                            <p class="vacanсy__card__qualification__text">
+                                {{ card.qualification }}
+                            </p>
+                        </section>
+                        <button class="vacanсy__card__btn">Отклинуться на вакансию</button>
+                    </div>
                 </div>
-            </div>
+            </transition>
         </div>
     </div>
 </template>
 
 <script>
 import Header from "@/components/desktop/Header";
+import WorkPreload from "@/views/desktop/WorkPreload";
+
 const Work = {
     name: "Work",
     components: {
         Header,
+        WorkPreload,
     },
-    data() {
-        return {
-            cards: [
-                {
-                    title: "C/C++ Software Engineer",
-                    responsibilities:
-                        "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-                    qualification:
-                        "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-                },
-                {
-                    title: "C/C++ Software Engineer",
-                    responsibilities:
-                        "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-                    qualification:
-                        "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-                },
-                {
-                    title: "C/C++ Software Engineer",
-                    responsibilities:
-                        "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-                    qualification:
-                        "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-                },
-                {
-                    title: "C/C++ Software Engineer",
-                    responsibilities:
-                        "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
-                    qualification:
-                        "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
-                },
-            ],
-        };
+    data: () => ({
+        loading: true,
+        cards: [
+            {
+                title: "C/C++ Software Engineer",
+                responsibilities:
+                    "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
+                qualification:
+                    "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
+            },
+            {
+                title: "C/C++ Software Engineer",
+                responsibilities:
+                    "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
+                qualification:
+                    "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
+            },
+            {
+                title: "C/C++ Software Engineer",
+                responsibilities:
+                    "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
+                qualification:
+                    "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
+            },
+            {
+                title: "C/C++ Software Engineer",
+                responsibilities:
+                    "работа над специально созданными низкоуровневыми системами хранения данных Telegram, распределенными по нескольким дата-центрам.",
+                qualification:
+                    "опыт работы над масштабируемыми проектами C/C++ и/или сетевыми протоколами, опыт работы с Linux, лучшие результаты в соревнованиях по программированию.",
+            },
+        ],
+    }),
+    mounted() {
+        setTimeout(() => {
+            this.loading = false;
+        }, 2000);
     },
 };
 export default Work;

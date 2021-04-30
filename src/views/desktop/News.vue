@@ -39,7 +39,7 @@
                     {{ name }}
                 </div>
             </div>
-            <transition-group name="list" tag="div" class="news-blog">
+            <transition-group name="fade" tag="div" class="news-blog">
                 <NewsItem
                     v-for="item in selectedNews"
                     :key="item.id"
@@ -270,13 +270,14 @@ export default News;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.list-enter-active,
-.list-leave-active {
-    transition: all 0.3s ease;
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
 }
-.list-enter,
-.list-leave-to {
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
     opacity: 0;
-    transform: translateX(20%);
+}
+.flip-list-move {
+    transition: transform 1s;
 }
 </style>
