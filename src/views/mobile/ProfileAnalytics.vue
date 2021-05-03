@@ -69,6 +69,9 @@
             <div class="wrapper border">
                 <div class="schedule">
                     <p>24 февр. 2021 — 2 апр. 2021</p>
+                    <div class="chart-wrapper">
+                        <canvas id="chart">1</canvas>
+                    </div>
                     <div class="scroll-position"></div>
                 </div>
             </div>
@@ -80,6 +83,7 @@
             <div class="wrapper border">
                 <div class="schedule">
                     <p>24 февр. 2021 — 2 апр. 2021</p>
+
                     <div class="scroll-position"></div>
                 </div>
             </div>
@@ -358,11 +362,38 @@ const ProfileAnalytics = {
                 },
             },
         ],
+        graphData: [
+            { id: 1, date: `2021-01-26T13:51:50.417Z`, views: 10 },
+            { id: 2, date: `2021-01-27T13:51:50.417Z`, views: 12 },
+            { id: 1, date: `2021-01-28T13:51:50.417Z`, views: 30 },
+        ],
     }),
     methods: {
         goBack() {
             this.$router.push("/mobile");
         },
+        chart(canvas, data) {
+            let HEIGHT = 277;
+            let WIDTH = 544;
+            let DPI_HEIGHT = HEIGHT * 2;
+            let DPI_WIDTH = WIDTH * 2;
+
+            let ctx = canvas.getContext("2d");
+            canvas.style.width = WIDTH + "px";
+            canvas.style.height = HEIGHT + "px";
+            canvas.width = DPI_WIDTH;
+            canvas.height = DPI_HEIGHT;
+
+            ctx.beginPath();
+            for (let { views, date: localeData } of data) {
+                console.log(views, localeData);
+            }
+            ctx.stroke();
+            ctx.closePath();
+        },
+    },
+    mounted() {
+        this.chart(document.getElementById("chart"), this.graphData);
     },
 };
 
@@ -483,6 +514,9 @@ export default ProfileAnalytics;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+.chart-wrapper {
+    flex: 1;
 }
 .scroll-position {
     height: 55px;

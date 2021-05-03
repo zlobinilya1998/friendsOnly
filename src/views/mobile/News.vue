@@ -1,30 +1,43 @@
 <template>
     <div>
-        <div class="slider">
-            <div
-                v-for="(value, name) in testData"
-                :key="name"
-                :style="{
-                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),url(${
-                        testData[name][testData[name].length - 1].background
-                    })`,
-                }"
-                :class="`slider-item ${activeBtn == name ? 'active' : ''}`"
-                v-on:click="activeBtn = name"
-            >
-                {{ name }}
+        <transition-group>
+            <div class="pre-slider" v-if="loading" key="first-slider">
+                <div v-for="item in 3" :key="item" class="pre-slider-item">
+                    <div class="pre-item-content"></div>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <transition-group name="list" tag="div" class="news">
-                <NewsItem
-                    v-for="item of selectedNews"
-                    :key="item.id"
-                    :item="item"
-                    @click.native="clickNews(item.id)"
-                />
-            </transition-group>
-        </div>
+            <div class="slider" v-else key="second-slider">
+                <div
+                    v-for="(value, name) in testData"
+                    :key="name"
+                    :style="{
+                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),url(${
+                            testData[name][testData[name].length - 1].background
+                        })`,
+                    }"
+                    :class="`slider-item ${activeBtn == name ? 'active' : ''}`"
+                    v-on:click="activeBtn = name"
+                >
+                    {{ name }}
+                </div>
+            </div>
+        </transition-group>
+
+        <transition-group>
+            <div class="container" v-if="loading" key="first"></div>
+            <div class="container" v-else key="second">
+                <transition name="list">
+                    <div class="news">
+                        <NewsItem
+                            v-for="item of selectedNews"
+                            :key="item.id"
+                            :item="item"
+                            @click.native="clickNews(item.id)"
+                        />
+                    </div>
+                </transition>
+            </div>
+        </transition-group>
     </div>
 </template>
 
@@ -41,6 +54,7 @@ const News = {
     },
     data: () => ({
         activeBtn: "Все",
+        loading: true,
         testData: {
             Все: [
                 {
@@ -180,6 +194,11 @@ const News = {
             });
         },
     },
+    mounted() {
+        setTimeout(() => {
+            this.loading = false;
+        }, 2500);
+    },
 };
 export default News;
 </script>
@@ -238,5 +257,41 @@ export default News;
 .list-leave-to {
     opacity: 0;
     transform: translateX(20%);
+}
+
+/* PRELOADER*/
+.pre-slider {
+    height: 71px;
+    margin-left: 23px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+}
+.pre-slider-item {
+    height: 44px;
+    width: 122px;
+    cursor: pointer;
+    padding: 16px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background: #ffffff;
+    transition: all 0.5s ease;
+}
+.pre-slider-item:first-child {
+    width: 55px;
+}
+.pre-item-content {
+    width: 92px;
+    height: 9px;
+    background: #f0f0f0;
+    border-radius: 50px;
+}
+.pre-second {
+    width: 105px;
+}
+.pre-slider-item:nth-child(n + 2) {
+    margin-left: 8px;
 }
 </style>

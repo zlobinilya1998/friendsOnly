@@ -146,6 +146,7 @@ p {
     opacity: 0.95;
     border-radius: 8px;
     background-repeat: no-repeat;
+    transition: all 0.4s;
 }
 .text-content {
     display: flex;

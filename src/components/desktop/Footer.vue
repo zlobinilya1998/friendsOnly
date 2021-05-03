@@ -81,10 +81,9 @@ export default Footer;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 90px;
     height: 114px;
     width: 940px;
-    margin: 0 auto;
+    margin: 90px auto 0;
     background: #ffffff;
     border-radius: 13px 13px 0px 0px;
 }

@@ -121,6 +121,7 @@ img {
         rgba(255, 255, 255, 1)
     );
     position: absolute;
+    top: 0;
     left: 0;
     z-index: 4;
     -webkit-animation: loadingPageAnimation infinite 1.5s;
