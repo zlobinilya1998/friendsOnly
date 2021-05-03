@@ -1,41 +1,62 @@
 <template>
     <div>
         <transition-group>
-            <div class="pre-slider" v-if="loading" key="first-slider">
-                <div v-for="item in 3" :key="item" class="pre-slider-item">
-                    <div class="pre-item-content"></div>
-                </div>
-            </div>
-            <div class="slider" v-else key="second-slider">
-                <div
-                    v-for="(value, name) in testData"
-                    :key="name"
-                    :style="{
-                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),url(${
-                            testData[name][testData[name].length - 1].background
-                        })`,
-                    }"
-                    :class="`slider-item ${activeBtn == name ? 'active' : ''}`"
-                    v-on:click="activeBtn = name"
-                >
-                    {{ name }}
-                </div>
-            </div>
-        </transition-group>
-
-        <transition-group>
-            <div class="container" v-if="loading" key="first"></div>
-            <div class="container" v-else key="second">
-                <transition name="list">
-                    <div class="news">
-                        <NewsItem
-                            v-for="item of selectedNews"
-                            :key="item.id"
-                            :item="item"
-                            @click.native="clickNews(item.id)"
-                        />
+            <div v-if="loading" key="first-slider">
+                <div class="pre-slider">
+                    <div v-for="item in 3" :key="item" class="pre-slider-item">
+                        <div class="pre-item-content"></div>
                     </div>
-                </transition>
+                </div>
+                <div class="container">
+                    <div class="news">
+                        <div v-for="item in 4" :key="item" class="pre-item">
+                            <div class="pageTotalLoad"></div>
+                            <div class="pre-content"></div>
+                            <div class="pre-text-content">
+                                <p class="pre-date"></p>
+                                <h5 class="pre-description"></h5>
+                                <h5 class="pre-description"></h5>
+                                <h5 class="pre-description-bottom"></h5>
+                                <div class="pre-rating">
+                                    <div class="pre-views"></div>
+                                    <div class="pre-like-blog">
+                                        <div class="pre-like"></div>
+                                        <div class="pre-dislike"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else key="second">
+                <div class="slider">
+                    <div
+                        v-for="(value, name) in testData"
+                        :key="name"
+                        :style="{
+                            background: `linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),url(${
+                                testData[name][testData[name].length - 1].background
+                            })`,
+                        }"
+                        :class="`slider-item ${activeBtn == name ? 'active' : ''}`"
+                        v-on:click="activeBtn = name"
+                    >
+                        {{ name }}
+                    </div>
+                </div>
+                <div class="container">
+                    <transition name="list">
+                        <div class="news">
+                            <NewsItem
+                                v-for="item of selectedNews"
+                                :key="item.id"
+                                :item="item"
+                                @click.native="clickNews(item.id)"
+                            />
+                        </div>
+                    </transition>
+                </div>
             </div>
         </transition-group>
     </div>
@@ -293,5 +314,95 @@ export default News;
 }
 .pre-slider-item:nth-child(n + 2) {
     margin-left: 8px;
+}
+
+/*PRELOADER ITEM*/
+.news {
+    display: flex;
+    flex-direction: column;
+}
+
+.pre-item {
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 307px;
+    overflow: hidden;
+    background: #ffffff;
+    padding: 16px 17px 23px 16px;
+}
+.pre-item:last-child {
+    margin-bottom: 55px;
+}
+
+.pre-content {
+    height: 135px;
+    background: #f0f0f0;
+    border-radius: 13px;
+}
+
+.pre-date {
+    width: 50px;
+    height: 8px;
+    background: #e3e3e3;
+    border-radius: 50px;
+    margin-top: 19px;
+}
+.pre-description {
+    margin-top: 16px;
+    width: 273px;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 50px;
+}
+.pre-description-bottom {
+    margin-top: 16px;
+    width: 212px;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 50px;
+}
+.pre-rating {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+.pre-views {
+    display: flex;
+    align-items: center;
+}
+.pre-like-blog {
+    display: flex;
+}
+.pre-like {
+    display: flex;
+    align-items: center;
+}
+.pre-dislike {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+.pre-views {
+    background: #e3e3e3;
+    border-radius: 50px;
+    width: 55px;
+    height: 12px;
+}
+.pre-like {
+    background: #e3e3e3;
+    border-radius: 50px;
+    width: 50px;
+    height: 12px;
+}
+.pre-dislike {
+    width: 50px;
+    height: 12px;
+
+    background: #e3e3e3;
+    border-radius: 50px;
 }
 </style>
