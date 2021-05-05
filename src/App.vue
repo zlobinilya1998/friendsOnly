@@ -7,6 +7,7 @@ import DesktopLayout from "./layouts/desktop/DesktopLayout.vue";
 import MobileLayout from "./layouts/mobile/MobileLayout.vue";
 import NewsLayout from "./layouts/mobile/NewsLayout.vue";
 import EmptyLayout from "@/layouts/mobile/EmptyLayout.vue";
+import EmptyDesktopLayout from "@/layouts/desktop/EmptyLayout.vue";
 
 const App = {
     components: {
@@ -14,6 +15,7 @@ const App = {
         MobileLayout,
         NewsLayout,
         EmptyLayout,
+        EmptyDesktopLayout,
     },
     computed: {
         layout() {

@@ -53,7 +53,7 @@ const routes = [
     {
         path: "/desktop/date",
         meta: {
-            layout: "desktop",
+            layout: "empty-desktop",
         },
         component: DatePicker,
     },

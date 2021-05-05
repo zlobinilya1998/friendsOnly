@@ -6,18 +6,25 @@
                 <h2 class="title-date">Выбрать даты</h2>
                 <p class="title-text">Telegram</p>
             </div>
-
+            <div class="input-wrapper">
+                <input
+                    v-model="inputs.start"
+                    type="text"
+                    placeholder="Выберите первую дату "
+                    class="date-input"
+                />
+                <input
+                    v-model="inputs.end"
+                    type="text"
+                    placeholder="Выберите вторую дату "
+                    class="date-input"
+                />
+            </div>
             <div class="date-wrapper">
                 <div v-for="month of displayedMonths" :key="month">
-                    <input
-                        type="text"
-                        v-model="secondInput"
-                        placeholder="Выберите вторую дату "
-                        class="date-input"
-                    />
                     <div class="date">
                         <div class="days">
-                            <div v-for="day in calendarData.day" :key="day">{{ day }}</div>
+                            <div v-for="day in weekDays" :key="day">{{ day }}</div>
                         </div>
                         <div
                             :style="{
@@ -40,8 +47,6 @@
                                 <div
                                     @click="clickOnDay(day.index)"
                                     class="date-day"
-                                    :class="{ 'selected-day': day.index === secondInput }"
-                                    :style="{ color: day.index === secondInput ? 'blue' : 'black' }"
                                     v-for="day in week"
                                     :key="day"
                                 >
@@ -56,83 +61,88 @@
             </div>
             <div class="date-btn">Подтвердить выбор</div>
         </div>
+        <Footer />
     </div>
 </template>
 
 <script>
 import Header from "@/components/desktop/Header";
+import Footer from "@/components/desktop/Footer";
 
 let DataPicker = {
     name: "DataPicker",
     components: {
         Header,
+        Footer,
     },
     data: () => ({
-        firstInput: null,
-        secondInput: null,
-        displayedMonths: [],
-        calendarData: {
-            year: new Date().getFullYear(),
-            dFirstMonth: "1",
-            day: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
+        inputs: {
+            start: null,
+            end: null,
         },
+        displayedMonths: [],
+        weekDays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
     }),
     methods: {
         getMonth(month) {
             let today = new Date();
             today.setMonth(month);
-            let value = today.toLocaleString("default", { month: "long", year: "numeric" });
+
+            const value = today.toLocaleString("default", { month: "long", year: "numeric" });
+
+            // В русской локали для года добавляется " г.", например "2021 г."
             if (navigator.languages[0] === "ru") return value.slice(0, -3);
             return value;
         },
-        generateCalendar(monthNumber) {
-            let days = [],
-                week = 0,
-                a;
-            days[week] = [];
-            let dLast = new Date(this.calendarData.year, monthNumber, 0).getDate();
-            for (let i = 1; i <= dLast; i++) {
-                if (
-                    new Date(this.calendarData.year, monthNumber, i).getDay() !=
-                    this.calendarData.dFirstMonth
-                ) {
-                    if (new Date().getDate() === i) {
-                        a = { index: i, currentDay: true };
-                    } else {
-                        a = { index: i };
+        generateCalendar(dt) {
+            // Заполняет неделю пустыми элементами
+            function fillWeek(week, fillFront) {
+                if (week.length > 0) {
+                    for (let i = week.length; i < 7; i++) {
+                        if (fillFront) week.unshift("");
+                        else week.push("");
                     }
-                    days[week].push(a);
-                } else {
-                    week++;
-                    days[week] = [];
-                    if (new Date().getDate() === i) {
-                        a = { index: i, currentDay: true };
-                    } else {
-                        a = { index: i };
-                    }
-                    days[week].push(a);
                 }
             }
-            if (days[0].length > 0) {
-                for (let i = days[0].length; i < 7; i++) {
-                    days[0].unshift("");
+
+            // Массив недель
+            let month = [];
+            let weekNumber = 0;
+            month[weekNumber] = [];
+
+            const lastDay = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
+            for (let i = 1; i <= lastDay; i++) {
+                const tmpDt = new Date(dt.getFullYear(), dt.getMonth(), i);
+
+                // При начале новой недели, мы хотим создать новый массив на эту неделю
+                if (tmpDt.getDay() === 1) {
+                    weekNumber++;
+                    month[weekNumber] = [];
                 }
+
+                month[weekNumber].push({ index: i });
             }
-            if (days[days.length - 1].length > 0) {
-                for (let i = days[days.length - 1].length; i < 7; i++) {
-                    days[days.length - 1].push("");
-                }
-            }
-            return { days, monthTitle: this.getMonth(monthNumber) };
+
+            // Забиваем недели пустышками: для первой недели мы добавляем пустышки в начало, а для
+            // последней в конец.
+            fillWeek(month[0], true);
+            fillWeek(month[month.length - 1], false);
+
+            return { days: month, monthTitle: this.getMonth(dt.getMonth()), month: dt };
         },
         clickOnDay(index) {
-            if (!this.firstInput) this.firstInput = index;
-            else if (!this.secondInput) this.secondInput = index;
+            if (!index) return;
+            if (!this.inputs.start) this.inputs.start = index;
+            else if (!this.inputs.end) this.inputs.end = index;
         },
     },
     mounted() {
-        this.displayedMonths.push(this.generateCalendar(new Date().getMonth()));
-        this.displayedMonths.push(this.generateCalendar(new Date().getMonth() + 1));
+        let start = new Date();
+        this.displayedMonths.push(this.generateCalendar(start));
+
+        let end = new Date();
+        end.setMonth(end.getMonth() + 1);
+        this.displayedMonths.push(this.generateCalendar(end));
     },
 };
 export default DataPicker;
@@ -162,7 +172,11 @@ export default DataPicker;
     line-height: 29px;
     color: #292941;
 }
-
+.input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 60px 0 0;
+}
 .date-wrapper {
     margin-top: 60px;
     display: flex;
@@ -171,7 +185,6 @@ export default DataPicker;
 .date-input {
     padding: 18px 25px;
     border: 1.5px solid rgba(0, 0, 0, 0.05);
-    margin-bottom: 64px;
     border-radius: 13px;
     height: 55px;
     width: 329px;
@@ -203,6 +216,7 @@ export default DataPicker;
     border-radius: 13px;
     padding: 25px 20px 30px;
     position: relative;
+    width: 329px;
 }
 .month-title {
     text-transform: capitalize;
@@ -272,6 +286,11 @@ export default DataPicker;
 .selected-day > p {
     position: relative;
     color: #fff;
+}
+
+.footer {
+    margin: 1px auto 0px;
+    border-radius: 0px;
 }
 @keyframes grow {
     0% {
