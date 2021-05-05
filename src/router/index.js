@@ -7,6 +7,8 @@ Vue.use(VueRouter);
 const Work = () => import("@/views/desktop/Work.vue");
 const News = () => import("@/views/desktop/News.vue");
 const NewsOpen = () => import("@/views/desktop/NewsOpen.vue");
+const ProfileAnalyticsDesktop = () => import("@/views/desktop/ProfileAnalytics.vue");
+const DatePicker = () => import("@/views/desktop/DatePicker.vue");
 
 //mobile
 const Vacancy = () => import("@/views/mobile/Vacancy.vue");
@@ -40,6 +42,20 @@ const routes = [
             layout: "desktop",
         },
         component: NewsOpen,
+    },
+    {
+        path: "/desktop/profile/analytics",
+        meta: {
+            layout: "desktop",
+        },
+        component: ProfileAnalyticsDesktop,
+    },
+    {
+        path: "/desktop/date",
+        meta: {
+            layout: "desktop",
+        },
+        component: DatePicker,
     },
 
     //Mobile
