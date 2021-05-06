@@ -7,24 +7,98 @@
                 <p class="title-text">Telegram</p>
             </div>
             <div class="input-wrapper">
-                <input
-                    v-model="inputs.start"
-                    type="text"
-                    placeholder="Выберите первую дату "
-                    class="date-input"
-                />
-                <input
-                    v-model="inputs.end"
-                    type="text"
-                    placeholder="Выберите вторую дату "
-                    class="date-input"
-                />
+                <div class="input-container">
+                    <input
+                        disabled
+                        :value="inputStartValue"
+                        type="text"
+                        placeholder="Выберите первую дату "
+                        class="date-input"
+                    />
+                    <transition name="fade">
+                        <svg
+                            v-if="inputs.start"
+                            :style="{
+                                cursor: 'pointer',
+                            }"
+                            @click="inputs.start = ''"
+                            width="17"
+                            height="17"
+                            viewBox="0 0 17 17"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="black" fill-opacity="0.1" />
+                            <g clip-path="url(#clip0)">
+                                <path
+                                    d="M9.43501 8.50017L11.1881 6.74711C11.3818 6.55341 11.3818 6.23939 11.1881 6.046L10.9544 5.81229C10.7606 5.61854 10.4466 5.61854 10.2532 5.81229L8.5002 7.56529L6.74714 5.81193C6.55344 5.61823 6.23942 5.61823 6.04603 5.81193L5.81196 6.04563C5.61826 6.23939 5.61826 6.55341 5.81196 6.74681L7.56532 8.50017L5.81232 10.2532C5.61857 10.4469 5.61857 10.7609 5.81232 10.9543L6.04603 11.188C6.23972 11.3817 6.55375 11.3817 6.74714 11.188L8.5002 9.43498L10.2532 11.188C10.4469 11.3817 10.761 11.3817 10.9544 11.188L11.1881 10.9543C11.3818 10.7606 11.3818 10.4466 11.1881 10.2532L9.43501 8.50017Z"
+                                    fill="white"
+                                />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0">
+                                    <rect
+                                        width="5.66667"
+                                        height="5.66667"
+                                        fill="white"
+                                        transform="translate(5.66669 5.66666)"
+                                    />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </transition>
+                </div>
+                <div class="input-container">
+                    <input
+                        disabled
+                        :value="inputEndValue"
+                        type="text"
+                        placeholder="Выберите вторую дату "
+                        class="date-input"
+                    />
+                    <transition name="fade">
+                        <svg
+                            v-if="inputs.end"
+                            @mouseenter="activeInputSvg.second = true"
+                            @mouseleave="activeInputSvg.second = false"
+                            :style="{
+                                cursor: 'pointer',
+                            }"
+                            @click="inputs.end = ''"
+                            width="17"
+                            height="17"
+                            viewBox="0 0 17 17"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="black" fill-opacity="0.1" />
+                            <g clip-path="url(#clip0)">
+                                <path
+                                    d="M9.43501 8.50017L11.1881 6.74711C11.3818 6.55341 11.3818 6.23939 11.1881 6.046L10.9544 5.81229C10.7606 5.61854 10.4466 5.61854 10.2532 5.81229L8.5002 7.56529L6.74714 5.81193C6.55344 5.61823 6.23942 5.61823 6.04603 5.81193L5.81196 6.04563C5.61826 6.23939 5.61826 6.55341 5.81196 6.74681L7.56532 8.50017L5.81232 10.2532C5.61857 10.4469 5.61857 10.7609 5.81232 10.9543L6.04603 11.188C6.23972 11.3817 6.55375 11.3817 6.74714 11.188L8.5002 9.43498L10.2532 11.188C10.4469 11.3817 10.761 11.3817 10.9544 11.188L11.1881 10.9543C11.3818 10.7606 11.3818 10.4466 11.1881 10.2532L9.43501 8.50017Z"
+                                    fill="white"
+                                />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0">
+                                    <rect
+                                        width="5.66667"
+                                        height="5.66667"
+                                        fill="white"
+                                        transform="translate(5.66669 5.66666)"
+                                    />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </transition>
+                </div>
             </div>
             <div class="date-wrapper">
-                <div v-for="month of displayedMonths" :key="month">
+                <div v-for="(month, index) of displayedMonths" :key="`${month}_${index}`">
                     <div class="date">
                         <div class="days">
-                            <div v-for="day in weekDays" :key="day">{{ day }}</div>
+                            <div v-for="(day, index) in weekDays" :key="`${day}_${index}`">
+                                {{ day }}
+                            </div>
                         </div>
                         <div
                             :style="{
@@ -33,7 +107,7 @@
                             }"
                         >
                             <h4 class="month-title">{{ month.monthTitle }}</h4>
-                            <p class="month-btn">Весь месяц</p>
+                            <p @click="selectAllMonth(month.month)" class="month-btn">Весь месяц</p>
                         </div>
                         <div class="month-inner">
                             <div
@@ -41,14 +115,14 @@
                                 :style="{
                                     justifyContent: 'space-between',
                                 }"
-                                v-for="week in month.days"
-                                :key="week"
+                                v-for="(week, index) in month.days"
+                                :key="`${week}_${index}`"
                             >
                                 <div
-                                    @click="clickOnDay(day.index)"
+                                    @click="clickOnDay(month.month, day.index)"
                                     class="date-day"
-                                    v-for="day in week"
-                                    :key="day"
+                                    v-for="(day, index) in week"
+                                    :key="index"
                                 >
                                     <p>
                                         {{ day.index }}
@@ -59,7 +133,13 @@
                     </div>
                 </div>
             </div>
-            <div class="date-btn">Подтвердить выбор</div>
+            <button
+                :disabled="!inputs.start"
+                class="date-btn"
+                :style="{ opacity: inputs.start && inputs.end ? '1' : '0.5' }"
+            >
+                Подтвердить выбор
+            </button>
         </div>
         <Footer />
     </div>
@@ -80,10 +160,23 @@ let DataPicker = {
             start: null,
             end: null,
         },
+        activeInputSvg: {
+            first: false,
+            second: false,
+        },
         displayedMonths: [],
         weekDays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
     }),
     methods: {
+        selectAllMonth(month) {
+            month.setDate(1);
+            this.inputs.start = month;
+            setTimeout(() => {
+                month.setMonth(month.getMonth() + 1);
+                month.setDate(0);
+                this.inputs.end = month;
+            }, 0);
+        },
         getMonth(month) {
             let today = new Date();
             today.setMonth(month);
@@ -130,10 +223,23 @@ let DataPicker = {
 
             return { days: month, monthTitle: this.getMonth(dt.getMonth()), month: dt };
         },
-        clickOnDay(index) {
+        clickOnDay(month, index) {
             if (!index) return;
-            if (!this.inputs.start) this.inputs.start = index;
-            else if (!this.inputs.end) this.inputs.end = index;
+            month.setDate(index);
+            if (!this.inputs.start) this.inputs.start = month;
+            else if (!this.inputs.end) this.inputs.end = month;
+        },
+    },
+    computed: {
+        inputStartValue() {
+            return this.inputs.start
+                ? this.inputs.start.toLocaleString("default", { month: "long", day: "numeric" })
+                : "";
+        },
+        inputEndValue() {
+            return this.inputs.end
+                ? this.inputs.end.toLocaleString("default", { month: "long", day: "numeric" })
+                : "";
         },
     },
     mounted() {
@@ -182,6 +288,16 @@ export default DataPicker;
     display: flex;
     justify-content: space-between;
 }
+.input-container {
+    position: relative;
+    display: flex;
+}
+.input-container > svg {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
 .date-input {
     padding: 18px 25px;
     border: 1.5px solid rgba(0, 0, 0, 0.05);
@@ -189,6 +305,9 @@ export default DataPicker;
     height: 55px;
     width: 329px;
     position: relative;
+}
+.date-input:disabled {
+    background: transparent;
 }
 .date-input::placeholder {
     font-weight: 500;
@@ -256,7 +375,6 @@ export default DataPicker;
 }
 .date-btn {
     background: #469bfc;
-    opacity: 0.5;
     border-radius: 13px;
     width: 329px;
     height: 55px;
@@ -266,6 +384,7 @@ export default DataPicker;
     justify-content: center;
     color: #ffffff;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 .selected-day {
     position: relative;
@@ -301,5 +420,22 @@ export default DataPicker;
         width: 100%;
         height: 100%;
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.4s ease;
+}
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-to {
+    opacity: 1;
+}
+.fade-leave {
+    opacity: 1;
+}
+.fade-leave-to {
+    opacity: 0;
 }
 </style>
