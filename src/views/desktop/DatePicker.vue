@@ -124,7 +124,7 @@
                                     v-for="(day, index) in week"
                                     :key="index"
                                 >
-                                    <p>
+                                    <p :style="{ cursor: day.index === '' ? 'none' : ' pointer' }">
                                         {{ day.index }}
                                     </p>
                                 </div>
@@ -240,6 +240,16 @@ let DataPicker = {
             return this.inputs.end
                 ? this.inputs.end.toLocaleString("default", { month: "long", day: "numeric" })
                 : "";
+        },
+        dataRange() {
+            let dateArray = [];
+            let currentDate = this.inputs.start;
+            let endDate = this.inputs.end;
+            while (currentDate <= endDate) {
+                dateArray.push(new Date(currentDate));
+                currentDate = currentDate.addDays(1);
+            }
+            return dateArray;
         },
     },
     mounted() {
@@ -363,7 +373,6 @@ export default DataPicker;
 }
 .date-day {
     width: 20px;
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
