@@ -121,6 +121,8 @@
                                 <div
                                     @click="clickOnDay(month.month, day.index)"
                                     class="date-day"
+                                    ref="selectedDay"
+                                    :class="{ 'selected-day': day.status }"
                                     v-for="(day, index) in week"
                                     :key="index"
                                 >
@@ -166,16 +168,44 @@ let DataPicker = {
         },
         displayedMonths: [],
         weekDays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
+        test: null,
     }),
     methods: {
+        getSelector() {
+            let elem = document.querySelectorAll(".selected-day");
+            if (elem) {
+                elem[0].classList += " side-day";
+                elem[elem.length - 1].classList += " side-day";
+            }
+        },
+        dataRange(flag) {
+            this.displayedMonths.forEach((month) => {
+                month.days.forEach((week) => {
+                    week.forEach((day) => {
+                        if (!day.index) return;
+                        if (!flag) {
+                            day.status = flag;
+                            return;
+                        }
+                        const date = new Date(month.month.getTime());
+                        date.setDate(day.index);
+                        if (this.inputs.start <= date && this.inputs.end >= date) {
+                            day.status = flag;
+                        } else day.status = false;
+                    });
+                });
+            });
+        },
         selectAllMonth(month) {
-            month.setDate(1);
-            this.inputs.start = month;
-            setTimeout(() => {
-                month.setMonth(month.getMonth() + 1);
-                month.setDate(0);
-                this.inputs.end = month;
-            }, 0);
+            const date1 = new Date(month.getTime());
+            date1.setDate(1);
+            this.inputs.start = date1;
+
+            const date2 = new Date(month.getTime());
+            date2.setMonth(month.getMonth() + 1);
+            date2.setDate(0);
+            this.inputs.end = date2;
+            setTimeout(this.getSelector, 0);
         },
         getMonth(month) {
             let today = new Date();
@@ -197,12 +227,10 @@ let DataPicker = {
                     }
                 }
             }
-
             // Массив недель
             let month = [];
             let weekNumber = 0;
             month[weekNumber] = [];
-
             const lastDay = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
             for (let i = 1; i <= lastDay; i++) {
                 const tmpDt = new Date(dt.getFullYear(), dt.getMonth(), i);
@@ -212,12 +240,11 @@ let DataPicker = {
                     weekNumber++;
                     month[weekNumber] = [];
                 }
-
                 month[weekNumber].push({ index: i });
             }
 
             // Забиваем недели пустышками: для первой недели мы добавляем пустышки в начало, а для
-            // последней в конец.
+            // последней в конец
             fillWeek(month[0], true);
             fillWeek(month[month.length - 1], false);
 
@@ -225,9 +252,10 @@ let DataPicker = {
         },
         clickOnDay(month, index) {
             if (!index) return;
-            month.setDate(index);
-            if (!this.inputs.start) this.inputs.start = month;
-            else if (!this.inputs.end) this.inputs.end = month;
+            const date = new Date(month.getTime());
+            date.setDate(index);
+            if (!this.inputs.start) this.inputs.start = date;
+            else if (!this.inputs.end && this.inputs.start < date) this.inputs.end = date;
         },
     },
     computed: {
@@ -241,15 +269,16 @@ let DataPicker = {
                 ? this.inputs.end.toLocaleString("default", { month: "long", day: "numeric" })
                 : "";
         },
-        dataRange() {
-            let dateArray = [];
-            let currentDate = this.inputs.start;
-            let endDate = this.inputs.end;
-            while (currentDate <= endDate) {
-                dateArray.push(new Date(currentDate));
-                currentDate = currentDate.addDays(1);
-            }
-            return dateArray;
+    },
+    watch: {
+        inputs: {
+            deep: true,
+            handler(newValue) {
+                if (newValue.start && newValue.end) {
+                    this.dataRange(true);
+                } else this.dataRange(false);
+                setTimeout(this.getSelector, 0);
+            },
         },
     },
     mounted() {
@@ -332,7 +361,7 @@ export default DataPicker;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 28px;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -346,6 +375,7 @@ export default DataPicker;
     padding: 25px 20px 30px;
     position: relative;
     width: 329px;
+    min-height: 335px;
 }
 .month-title {
     text-transform: capitalize;
@@ -360,20 +390,23 @@ export default DataPicker;
     font-size: 14px;
     line-height: 17px;
 }
-.month-inner {
-    margin-top: 25px;
-}
+
 .date-week {
     display: flex;
     text-align: center;
-    margin: 0 0 26px;
+    margin: 0 0 25px;
+    border-radius: 150px;
 }
+.date-week:first-child {
+    margin: 25px 0;
+}
+
 .date-week:last-child {
     margin: 0;
 }
 .date-day {
-    width: 20px;
     display: flex;
+    flex: 1;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -400,22 +433,26 @@ export default DataPicker;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-}
-.selected-day::before {
-    content: "";
-    position: absolute;
-    height: 25px;
-    width: 25px;
-    animation: grow 0.1s;
-    background: #469bfc;
-    border-radius: 50px;
-}
-.selected-day > p {
-    position: relative;
-    color: #fff;
+    color: #469bfc;
+    opacity: 1;
 }
 
+.selected-day > p {
+    position: relative;
+    color: #469bfc;
+}
+.side-day > p {
+    color: rgb(250, 249, 246);
+    position: relative;
+}
+.side-day::before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    background: #469bfc;
+    border-radius: 150px;
+}
 .footer {
     margin: 1px auto 0px;
     border-radius: 0px;
