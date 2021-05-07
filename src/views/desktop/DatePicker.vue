@@ -173,6 +173,7 @@ let DataPicker = {
     methods: {
         getSelector() {
             let elem = document.querySelectorAll(".selected-day");
+            elem.forEach((item) => item.classList.remove("side-day"));
             if (elem) {
                 elem[0].classList += " side-day";
                 elem[elem.length - 1].classList += " side-day";

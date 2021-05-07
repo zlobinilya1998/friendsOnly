@@ -16,6 +16,7 @@ const MobileNews = () => import("@/views/mobile/News.vue");
 const MobileNewsOpen = () => import("@/views/mobile/NewsOpen.vue");
 const Comments = () => import("@/views/mobile/Comments.vue");
 const ProfileAnalytics = () => import("@/views/mobile/ProfileAnalytics.vue");
+const DatePickerMobile = () => import("@/views/mobile/DatePicker");
 
 const routes = [
     //Desktop
@@ -91,6 +92,7 @@ const routes = [
         meta: { layout: "empty" },
     },
     { path: "/mobile/profile/analytics", meta: { layout: "empty" }, component: ProfileAnalytics },
+    { path: "/mobile/date", meta: { layout: "empty" }, component: DatePickerMobile },
 ];
 const router = new VueRouter({
     mode: "history",
