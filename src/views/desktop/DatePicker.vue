@@ -255,7 +255,7 @@ let DataPicker = {
             if (!index) return;
             const date = new Date(month.getTime());
             date.setDate(index);
-            if (!this.inputs.start) this.inputs.start = date;
+            if (!this.inputs.start && date < this.inputs.end) this.inputs.start = date;
             else if (!this.inputs.end && this.inputs.start < date) this.inputs.end = date;
         },
     },
