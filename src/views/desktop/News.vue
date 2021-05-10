@@ -279,7 +279,7 @@ export default News;
     background: #469bfc !important;
 }
 .btn {
-    position: absolute;
+    position: fixed;
     top: 95px;
     left: 27px;
     width: 61px;
@@ -296,15 +296,12 @@ export default News;
     background: #ffffff;
     border-radius: 0px 0px 13px 13px;
     padding: 0px 20px 30px 20px;
-    margin-top: 1px;
-    margin-bottom: 60px;
 }
 .news-blog {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-
 .fade-leave-enter,
 .fade-enter {
     transition: all 0.5s;
@@ -358,7 +355,7 @@ export default News;
     opacity: 0.95;
     border-radius: 8px;
     background: #f5f5f5;
-    transition: all 0.4s;
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
 }

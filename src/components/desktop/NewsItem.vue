@@ -118,7 +118,6 @@ export default NewsItem;
 
 <style scoped>
 h5 {
-    font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 150%;
@@ -127,7 +126,6 @@ h5 {
 
 p {
     color: #ffffff;
-    font-style: normal;
     font-weight: bold;
     font-size: 14px;
     line-height: 150%;
@@ -142,7 +140,6 @@ p {
     margin-top: 15px;
     display: flex;
     align-items: flex-end;
-    mix-blend-mode: multiply;
     opacity: 0.95;
     border-radius: 8px;
     background-repeat: no-repeat;
@@ -153,7 +150,6 @@ p {
     flex-direction: column;
 }
 .date {
-    font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
@@ -170,7 +166,6 @@ p {
 .views {
     display: flex;
     align-items: center;
-    font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 150%;

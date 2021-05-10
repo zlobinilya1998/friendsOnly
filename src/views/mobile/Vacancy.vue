@@ -36,38 +36,76 @@
                     Команда FriendsОnly создана небольшой группой специалистов, которые любят своё
                     дело и всегда заряжены на результат.
                 </p>
-                <p class="about__text">
+                <p :style="{ margin: '20px 0 0' }" class="about__text">
                     Если вы хотите присоединиться к команде FriendsOnly, ознакомьтесь с актуальными
                     вакансиями ниже.
                 </p>
             </section>
         </div>
-
-        <div class="vacancy">
-            <div v-for="(card, index) of cards" :key="index" class="card">
-                <h3 class="card__title">{{ card.title }}</h3>
-                <hr />
-                <section class="card__responsibilities">
-                    <h4 class="card__responsibilities__title">
-                        Обязанности
-                    </h4>
-                    <p class="card__responsibilities__text">
-                        {{ card.responsibilities }}
-                    </p>
-                </section>
-                <section class="card__qualification">
-                    <h4 class="card__qualification__title">
-                        Предпочтительная квалификация
-                    </h4>
-                    <p class="card__qualification__text">
-                        {{ card.qualification }}
-                    </p>
-                </section>
-                <button class="card__btn">
-                    Отклинуться на вакансию
-                </button>
+        <transition-group name="fade">
+            <div v-if="loading" key="first" class="vacancy">
+                <div v-for="(card, index) of cards" :key="index" class="card">
+                    <div class="pageTotalLoad"></div>
+                    <h3 class="card__title preloader"></h3>
+                    <hr />
+                    <section>
+                        <p class="card__responsibilities__title preloader"></p>
+                        <p class="card__qualification__title preloader"></p>
+                        <p class="card__qualification__title preloader"></p>
+                        <p
+                            :style="{ width: '70%' }"
+                            class="card__qualification__text preloader"
+                        ></p>
+                        <p
+                            :style="{ width: '60%' }"
+                            class="card__qualification__text preloader"
+                        ></p>
+                    </section>
+                    <section>
+                        <p
+                            :style="{ margin: '26px 0 0' }"
+                            class="card__responsibilities__title preloader"
+                        ></p>
+                        <p class="card__qualification__title preloader"></p>
+                        <p class="card__qualification__title preloader"></p>
+                        <p
+                            :style="{ width: '70%' }"
+                            class="card__qualification__text preloader"
+                        ></p>
+                        <p
+                            :style="{ width: '60%' }"
+                            class="card__qualification__text preloader"
+                        ></p>
+                    </section>
+                    <button class="card__btn preloader"></button>
+                </div>
             </div>
-        </div>
+            <div v-else key="second" class="vacancy">
+                <div v-for="(card, index) of cards" :key="index" class="card">
+                    <h3 class="card__title">{{ card.title }}</h3>
+                    <hr />
+                    <section class="card__responsibilities">
+                        <h4 class="card__responsibilities__title">
+                            Обязанности
+                        </h4>
+                        <p class="card__responsibilities__text">
+                            {{ card.responsibilities }}
+                        </p>
+                    </section>
+                    <section class="card__qualification">
+                        <h4 class="card__qualification__title">
+                            Предпочтительная квалификация
+                        </h4>
+                        <p class="card__qualification__text">
+                            {{ card.qualification }}
+                        </p>
+                    </section>
+                    <button class="card__btn">
+                        Отклинуться на вакансию
+                    </button>
+                </div>
+            </div>
+        </transition-group>
     </div>
 </template>
 
@@ -75,6 +113,7 @@
 const Vacancy = {
     name: "Vacancy",
     data: () => ({
+        loading: true,
         cards: [
             {
                 title: "C/C++ Software Engineer",
@@ -92,6 +131,11 @@ const Vacancy = {
             },
         ],
     }),
+    mounted() {
+        setTimeout(() => {
+            this.loading = false;
+        }, 2000);
+    },
 };
 export default Vacancy;
 </script>
@@ -111,11 +155,7 @@ export default Vacancy;
     border-radius: 8px;
 }
 .about__wrapper {
-    height: 147px;
     margin-top: 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 .about__title {
     display: flex;
@@ -138,12 +178,19 @@ export default Vacancy;
     padding: 20px 20px 20px 18px;
     background: #ffffff;
     border-radius: 8px;
+    overflow: hidden;
 }
 .card__title {
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 150%;
+}
+.card__title.preloader {
+    background: #dbdbdb;
+    width: 95px;
+    height: 15px;
+    border-radius: 50px;
 }
 .card__responsibilities__title {
     font-family: "SF Pro Display-Semibold";
@@ -152,6 +199,13 @@ export default Vacancy;
     font-weight: 500;
     font-size: 13px;
     line-height: 165%;
+}
+.card__responsibilities__title.preloader {
+    width: 75px;
+    height: 12px;
+    background: #e3e3e3;
+    border-radius: 50px;
+    margin: 44px 0 0;
 }
 .card__responsibilities__text {
     font-style: normal;
@@ -168,12 +222,30 @@ export default Vacancy;
     font-size: 13px;
     line-height: 165%;
 }
+.card__qualification__title.preloader {
+    width: 90%;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 50px;
+    margin: 13px 0 0;
+}
 .card__qualification__text {
     font-style: normal;
     font-weight: normal;
     font-size: 13px;
     line-height: 165%;
     opacity: 0.5;
+}
+.card__qualification__text.preloader {
+    width: 90%;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 50px;
+    opacity: 1;
+    margin: 13px 0 0;
+}
+.card__qualification__text.preloader:first-child {
+    width: 70%;
 }
 .card__btn {
     margin-top: 20px;
@@ -185,6 +257,11 @@ export default Vacancy;
     border: none;
     color: #ffffff;
     background: #469bfc;
+    border-radius: 8px;
+}
+.card__btn.preloader {
+    height: 50px;
+    background: #dbdbdb;
     border-radius: 8px;
 }
 </style>

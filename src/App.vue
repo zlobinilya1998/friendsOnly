@@ -115,6 +115,7 @@ img {
 }
 .pageTotalLoad {
     width: 225px;
+    opacity: 0.4;
     height: 100%;
     background: linear-gradient(
         to left,

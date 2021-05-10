@@ -171,7 +171,7 @@ const DatePicker = {
             else if (!this.inputs.end && this.inputs.start < date) this.inputs.end = date;
         },
         goBack() {
-            this.$router.go(-1);
+            this.$router.push("/mobile");
         },
     },
     computed: {
