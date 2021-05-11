@@ -159,14 +159,11 @@ let DataPicker = {
         weekDays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
     }),
     methods: {
-        getSelector() {
+        highlightSelectedRange() {
             let items = document.querySelectorAll(".selected-day");
-            console.log(items);
             items.forEach((item) => item.classList.remove("side-day"));
-            if (items) {
-                items[0].classList.add("side-day");
-                items[items.length - 1].classList.add("side-day");
-            }
+            items[0].classList.add("side-day");
+            items[items.length - 1].classList.add("side-day");
         },
         dataRange(flag) {
             this.displayedMonths.forEach((month) => {
@@ -265,11 +262,10 @@ let DataPicker = {
         inputs: {
             deep: true,
             handler(observer) {
-                console.log(observer);
                 if (observer.start && observer.end) {
                     this.dataRange(true);
+                    this.$nextTick(this.highlightSelectedRange);
                 } else this.dataRange(false);
-                setTimeout(this.getSelector, 0);
             },
         },
     },
