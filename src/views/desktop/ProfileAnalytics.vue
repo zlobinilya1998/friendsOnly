@@ -44,11 +44,11 @@
                     </div>
                 </div>
             </div>
-            <div v-for="item in graphData" :key="item.title">
+            <Chart :graphData="graphData" />
+            <div v-for="item in graphName" :key="item.title">
                 <div class="text-content">{{ item.title }}</div>
                 <div class="graph-container">
                     <div class="date">{{ item.date }}</div>
-                    <canvas id="chart"></canvas>
                 </div>
             </div>
         </div>
@@ -56,92 +56,35 @@
 </template>
 
 <script>
-import Header from "../../components/desktop/Header";
+import Header from "@/components/desktop/Header";
+import Chart from "@/components/desktop/Chart";
 
 let ProfileAnalytics = {
     name: "ProfileAnalytics",
     components: {
         Header,
+        Chart,
     },
     data: () => ({
-        graphData: [
+        graphName: [
             { title: "Переходы в  профиль", date: "24 февр. 2021 — 2 апр. 2021" },
             { title: "Просмотры ", date: "24 февр. 2021 — 2 апр. 2021" },
             { title: "Регистрации", date: "24 февр. 2021 — 2 апр. 2021" },
             { title: "Подписки", date: "24 февр. 2021 — 2 апр. 2021" },
             { title: "Заработано  ", date: "24 февр. 2021 — 2 апр. 2021" },
         ],
-    }),
-    methods: {
-        createChart(canvas, data) {
-            let WIDTH = 700;
-            let HEIGHT = 200;
-            let PADDING = 10;
-            let DPI_WIDTH = WIDTH * 2;
-            let DPI_HEIGHT = HEIGHT * 2;
-            let ROWS_COUNT = 15;
-            let ctx = canvas.getContext("2d");
-            canvas.style.width = WIDTH + "px";
-            canvas.style.height = HEIGHT + "px";
-            canvas.width = DPI_WIDTH;
-            canvas.height = DPI_HEIGHT;
-
-            //===y axis
-            let step = 50;
-            ctx.beginPath();
-            ctx.strokeStyle = "#bbb";
-            for (let i = 1; i <= ROWS_COUNT; i++) {
-                let y = step * i;
-                ctx.moveTo(PADDING, DPI_HEIGHT - y);
-                ctx.lineTo(DPI_WIDTH, DPI_HEIGHT - y);
-            }
-            ctx.stroke();
-            ctx.closePath();
-
-            //y text
-            ctx.beginPath();
-            ctx.font = "30px Roboto";
-            ctx.fillStyle = "grey";
-            for (let i = 0; i <= ROWS_COUNT; i++) {
-                let y = step * i;
-                ctx.moveTo(0, DPI_HEIGHT - y);
-                ctx.fillText(y, PADDING, DPI_HEIGHT - y - PADDING);
-            }
-            ctx.stroke();
-            ctx.closePath();
-
-            //=== x text
-            ctx.beginPath();
-            ctx.font = "30px Roboto";
-            ctx.fillStyle = "grey";
-
-            let dates = [...new Set(data.map((item) => item.date))];
-            dates.forEach((date, i) => {
-                let step = 50;
-                let x = step * i;
-
-                let current = new Date(date).toLocaleDateString("ru-RU", {
-                    month: "long",
-                    day: "numeric",
-                });
-                ctx.fillText(current.slice(0, 6), x * 5 + PADDING * 10, DPI_HEIGHT - PADDING);
-            });
-            ctx.stroke();
-            ctx.closePath();
-            //
-        },
-    },
-    mounted() {
-        this.createChart(document.getElementById("chart"), [
+        graphData: [
             { id: 1, date: `2021-01-26T13:51:50.417Z`, views: 10 },
             { id: 2, date: `2021-01-27T13:51:50.417Z`, views: 12 },
             { id: 3, date: `2021-01-28T13:51:50.417Z`, views: 30 },
             { id: 4, date: `2021-01-29T13:51:50.417Z`, views: 40 },
             { id: 5, date: `2021-01-30T13:51:50.417Z`, views: 23 },
-            { id: 6, date: `2021-01-28T13:51:50.417Z`, views: 74 },
-            { id: 7, date: `2021-01-28T13:51:50.417Z`, views: 25 },
-        ]);
-    },
+            { id: 6, date: `2021-02-01T13:51:50.417Z`, views: 100 },
+            { id: 7, date: `2021-02-02T13:51:50.417Z`, views: 75 },
+            { id: 8, date: `2021-02-03T13:51:50.417Z`, views: 44 },
+            { id: 9, date: `2021-02-04T13:51:50.417Z`, views: 120 },
+        ],
+    }),
 };
 
 export default ProfileAnalytics;

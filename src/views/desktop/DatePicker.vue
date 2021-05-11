@@ -2,6 +2,25 @@
     <div>
         <Header />
         <div class="container">
+            <router-link to="/desktop" tag="div" class="btn-back">
+                <svg
+                    width="5"
+                    height="9"
+                    viewBox="0 0 5 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        opacity="1"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M3.97949 8.82102L0.175092 4.9321C-0.0583645 4.69346 -0.0583645 4.30654 0.175092 4.0679L3.97949 0.178982C4.21294 -0.059661 4.59145 -0.0596609 4.82491 0.178982C5.05836 0.417625 5.05836 0.804543 4.82491 1.04319L1.44322 4.5L4.82491 7.95681C5.05836 8.19546 5.05836 8.58237 4.82491 8.82102C4.59145 9.05966 4.21294 9.05966 3.97949 8.82102Z"
+                        fill="#292941"
+                        fill-opacity="1"
+                    />
+                </svg>
+                Назад
+            </router-link>
             <div class="title">
                 <h2 class="title-date">Выбрать даты</h2>
                 <p class="title-text">Telegram</p>
@@ -151,10 +170,6 @@ let DataPicker = {
             start: null,
             end: null,
         },
-        activeInputSvg: {
-            first: false,
-            second: false,
-        },
         displayedMonths: [],
         weekDays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
     }),
@@ -285,12 +300,25 @@ export default DataPicker;
 svg {
     cursor: pointer;
 }
+.btn-back {
+    position: fixed;
+    left: 27px;
+    top: 100px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    opacity: 0.5;
+}
+.btn-back > svg {
+    margin: 0 15px 0 0;
+}
 .container {
     max-width: 940px;
     margin: 0 auto;
     background: #ffffff;
     padding: 54px 126px 200px;
     min-height: 100vh;
+    position: relative;
 }
 .title {
     text-align: center;

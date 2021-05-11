@@ -80,16 +80,13 @@ const DatePicker = {
         },
         displayedMonths: [],
         weekDays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
-        test: null,
     }),
     methods: {
-        getSelector() {
-            let elem = document.querySelectorAll(".selected-day");
-            elem.forEach((item) => item.classList.remove("side-day"));
-            if (elem) {
-                elem[0].classList += " side-day";
-                elem[elem.length - 1].classList += " side-day";
-            }
+        highlightSelectedRange() {
+            let items = document.querySelectorAll(".selected-day");
+            items.forEach((item) => item.classList.remove("side-day"));
+            items[0].classList.add("side-day");
+            items[items.length - 1].classList.add("side-day");
         },
         dataRange(flag) {
             this.displayedMonths.forEach((month) => {
@@ -167,6 +164,7 @@ const DatePicker = {
             if (!index) return;
             const date = new Date(month.getTime());
             date.setDate(index);
+            if (this.inputs.end && date >= this.inputs.end) return;
             if (!this.inputs.start) this.inputs.start = date;
             else if (!this.inputs.end && this.inputs.start < date) this.inputs.end = date;
         },
@@ -189,11 +187,11 @@ const DatePicker = {
     watch: {
         inputs: {
             deep: true,
-            handler(newValue) {
-                if (newValue.start && newValue.end) {
+            handler(observer) {
+                if (observer.start && observer.end) {
                     this.dataRange(true);
+                    this.$nextTick(this.highlightSelectedRange);
                 } else this.dataRange(false);
-                setTimeout(this.getSelector, 0);
             },
         },
     },
