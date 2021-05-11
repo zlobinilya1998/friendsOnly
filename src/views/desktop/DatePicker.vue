@@ -18,9 +18,6 @@
                     <transition name="fade">
                         <svg
                             v-if="inputs.start"
-                            :style="{
-                                cursor: 'pointer',
-                            }"
                             @click="inputs.start = ''"
                             width="17"
                             height="17"
@@ -59,11 +56,6 @@
                     <transition name="fade">
                         <svg
                             v-if="inputs.end"
-                            @mouseenter="activeInputSvg.second = true"
-                            @mouseleave="activeInputSvg.second = false"
-                            :style="{
-                                cursor: 'pointer',
-                            }"
                             @click="inputs.end = ''"
                             width="17"
                             height="17"
@@ -112,9 +104,6 @@
                         <div class="month-inner">
                             <div
                                 class="date-week"
-                                :style="{
-                                    justifyContent: 'space-between',
-                                }"
                                 v-for="(week, index) in month.days"
                                 :key="`${week}_${index}`"
                             >
@@ -136,7 +125,7 @@
                 </div>
             </div>
             <button
-                :disabled="!inputs.start"
+                :disabled="!inputs.start && !inputs.end"
                 class="date-btn"
                 :style="{ opacity: inputs.start && inputs.end ? '1' : '0.5' }"
             >
@@ -168,15 +157,15 @@ let DataPicker = {
         },
         displayedMonths: [],
         weekDays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
-        test: null,
     }),
     methods: {
         getSelector() {
-            let elem = document.querySelectorAll(".selected-day");
-            elem.forEach((item) => item.classList.remove("side-day"));
-            if (elem) {
-                elem[0].classList += " side-day";
-                elem[elem.length - 1].classList += " side-day";
+            let items = document.querySelectorAll(".selected-day");
+            console.log(items);
+            items.forEach((item) => item.classList.remove("side-day"));
+            if (items) {
+                items[0].classList.add("side-day");
+                items[items.length - 1].classList.add("side-day");
             }
         },
         dataRange(flag) {
@@ -255,7 +244,8 @@ let DataPicker = {
             if (!index) return;
             const date = new Date(month.getTime());
             date.setDate(index);
-            if (!this.inputs.start && date < this.inputs.end) this.inputs.start = date;
+            if (this.inputs.end && date >= this.inputs.end) return;
+            if (!this.inputs.start) this.inputs.start = date;
             else if (!this.inputs.end && this.inputs.start < date) this.inputs.end = date;
         },
     },
@@ -274,8 +264,9 @@ let DataPicker = {
     watch: {
         inputs: {
             deep: true,
-            handler(newValue) {
-                if (newValue.start && newValue.end) {
+            handler(observer) {
+                console.log(observer);
+                if (observer.start && observer.end) {
                     this.dataRange(true);
                 } else this.dataRange(false);
                 setTimeout(this.getSelector, 0);
@@ -295,6 +286,9 @@ export default DataPicker;
 </script>
 
 <style scoped>
+svg {
+    cursor: pointer;
+}
 .container {
     max-width: 940px;
     margin: 0 auto;
