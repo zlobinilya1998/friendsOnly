@@ -72,8 +72,10 @@
             </div>
         </div>
         <div v-else class="container" key="second">
+            <NewsOpenBackground />
             <svg
                 @click="scrollTop"
+                ref="scrollTop"
                 class="arrow-up"
                 width="47"
                 height="47"
@@ -277,8 +279,13 @@
 </template>
 
 <script>
+import NewsOpenBackground from "@/components/mobile/NewsOpenBackground";
+
 const NewsOpen = {
     name: "NewsOpen",
+    components: {
+        NewsOpenBackground,
+    },
     data: () => ({
         lastScrollTop: 0,
         loading: true,
@@ -321,8 +328,11 @@ const NewsOpen = {
         },
         handleScroll() {
             let pageY = window.pageYOffset;
-            let { menu } = this.$refs;
-            if (!menu) return;
+            let { menu, scrollTop } = this.$refs;
+            if (!menu && !scrollTop) return;
+            if (pageY > 200) scrollTop.style.opacity = 1;
+            else scrollTop.style.opacity = 0;
+
             if (pageY > this.lastScrollTop) {
                 menu.style.bottom = "-300px";
                 menu.style.opacity = "0";
@@ -348,19 +358,21 @@ export default NewsOpen;
 
 <style scoped>
 .container {
-    padding: 30px 0px 90px 0px;
+    padding: 0 0 90px 0;
     position: relative;
 }
 .arrow-up {
     cursor: pointer;
     position: fixed;
+    transition: all 0.4s ease;
     bottom: 185px;
+    opacity: 0;
     right: 0;
     transform: translateX(-50%);
 }
 
 .container-inner {
-    padding: 0px 26px 0px 23px;
+    padding: 30px 26px 0px 23px;
 }
 .img-wrapper {
     margin: 30px 0px;
@@ -411,7 +423,7 @@ export default NewsOpen;
 }
 
 .pre-view {
-    height: 51vh;
+    height: 530px;
     background: #e9e9e9;
     border-radius: 0px 0px 20px 20px;
     padding: 30px 23px 37px;
@@ -486,7 +498,7 @@ export default NewsOpen;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+    height: 200px;
 }
 .pre-loader > svg {
     animation: rotation 1s linear infinite;

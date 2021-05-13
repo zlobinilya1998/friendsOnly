@@ -1,5 +1,6 @@
 <template>
     <div>
+        <NewsOpenBackground />
         <div class="comments-wrapper">
             <p class="comments-count">{{ commentsCount }} комментария</p>
             <Comment
@@ -43,11 +44,13 @@
 </template>
 
 <script>
-import Comment from "../../components/mobile/Comment";
+import NewsOpenBackground from "@/components/mobile/NewsOpenBackground";
+import Comment from "@/components/mobile/Comment";
 
 const Comments = {
     components: {
         Comment,
+        NewsOpenBackground,
     },
     data: () => ({
         input: "",
@@ -119,12 +122,23 @@ export default Comments;
 .comments-wrapper {
     bottom: 0;
     max-width: 600px;
-    height: 54vh;
-    position: absolute;
+    max-height: 400px;
+    position: fixed;
     background: #ffffff;
     border-radius: 13px 13px 0px 0px;
     padding: 25px 23px 0 23px;
-    overflow: auto;
+    overflow-y: scroll;
+}
+.comments-wrapper::before {
+    content: "";
+    width: 40px;
+    height: 4px;
+    background: red;
+    position: absolute;
+    top: -20px;
+    left: 50px;
+    border-radius: 80px;
+    display: block;
 }
 .comments-wrapper::-webkit-scrollbar {
     display: none;
