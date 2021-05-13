@@ -2,7 +2,6 @@
     <div class="content">
         <div class="news-background">
             <div class="item-shadow"></div>
-
             <img :src="img" class="item-img" />
             <router-link class="btn" to="/mobile/news">
                 <svg
@@ -128,7 +127,7 @@
 </template>
 
 <script>
-import img from "../../../public/img/News1.png";
+import img from "@/../public/img/News1.png";
 
 const NewsLayout = {
     name: "NewsLayout",

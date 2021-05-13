@@ -219,6 +219,12 @@
                     <div class="like-bar">
                         <div class="like-item">
                             <svg
+                                @click="
+                                    () => {
+                                        likeBar.like = !likeBar.like;
+                                        likeBar.dislike = false;
+                                    }
+                                "
                                 width="20"
                                 height="20"
                                 viewBox="0 0 20 20"
@@ -228,12 +234,12 @@
                                 <g clip-path="url(#clip10)">
                                     <path
                                         d="M1.45833 19.1655H3.54167C4.34583 19.1655 5 18.5114 5 17.7072V8.12386C5 7.31969 4.34583 6.66553 3.54167 6.66553H1.45833C0.654167 6.66553 0 7.31969 0 8.12386V17.7072C0 18.5114 0.654167 19.1655 1.45833 19.1655Z"
-                                        fill="#292941"
+                                        :fill="likeBar.like ? 'blue' : '#292941'"
                                         fill-opacity="0.6"
                                     />
                                     <path
                                         d="M10.6508 0.625C9.8175 0.625 9.40083 1.04167 9.40083 3.125C9.40083 5.105 7.48333 6.69833 6.25 7.51917V17.8425C7.58417 18.46 10.255 19.375 14.4008 19.375H15.7342C17.3592 19.375 18.7425 18.2083 19.0175 16.6083L19.9508 11.1917C20.3008 9.15 18.7342 7.29167 16.6675 7.29167H12.7342C12.7342 7.29167 13.3592 6.04167 13.3592 3.95833C13.3592 1.45833 11.4842 0.625 10.6508 0.625Z"
-                                        fill="#292941"
+                                        :fill="likeBar.like ? 'blue' : '#292941'"
                                         fill-opacity="0.6"
                                     />
                                 </g>
@@ -246,6 +252,12 @@
                         </div>
                         <div class="like-item">
                             <svg
+                                @click="
+                                    () => {
+                                        likeBar.dislike = !likeBar.dislike;
+                                        likeBar.like = false;
+                                    }
+                                "
                                 width="20"
                                 height="20"
                                 viewBox="0 0 20 20"
@@ -255,12 +267,12 @@
                                 <g clip-path="url(#clip10)">
                                     <path
                                         d="M1.45833 0.834718H3.54167C4.34583 0.834718 5 1.48888 5 2.29305V11.8764C5 12.6806 4.34583 13.3347 3.54167 13.3347H1.45833C0.654167 13.3347 0 12.6806 0 11.8764V2.29305C0 1.48888 0.654167 0.834718 1.45833 0.834718Z"
-                                        fill="#292941"
+                                        :fill="likeBar.dislike ? 'blue' : '#292941'"
                                         fill-opacity="0.6"
                                     />
                                     <path
                                         d="M10.6508 19.375C9.8175 19.375 9.40083 18.9583 9.40083 16.875C9.40083 14.895 7.48333 13.3017 6.25 12.4808V2.1575C7.58417 1.54 10.255 0.625 14.4008 0.625H15.7342C17.3592 0.625 18.7425 1.79167 19.0175 3.39167L19.9508 8.80833C20.3008 10.85 18.7342 12.7083 16.6675 12.7083H12.7342C12.7342 12.7083 13.3592 13.9583 13.3592 16.0417C13.3592 18.5417 11.4842 19.375 10.6508 19.375Z"
-                                        fill="#292941"
+                                        :fill="likeBar.dislike ? 'blue' : '#292941'"
                                         fill-opacity=".6"
                                     />
                                 </g>
@@ -506,6 +518,13 @@ const NewsOpen = {
         loading: true,
         lastScrollTop: 0,
         input: "",
+        likeBar: {
+            like: false,
+            dislike: false,
+            message: false,
+            share: false,
+            logo: false,
+        },
         img: image1,
         news: [
             {
@@ -581,6 +600,9 @@ const NewsOpen = {
         postId() {
             return this.$route.params.post;
         },
+        likeBarStatus() {
+            return this.likeBar;
+        },
     },
     methods: {
         scrollTop() {
@@ -603,6 +625,9 @@ export default NewsOpen;
 </script>
 
 <style scoped>
+path {
+    transition: all 0.5s ease;
+}
 .containerOuter {
     width: 940px;
     margin: 0 auto;
@@ -683,6 +708,7 @@ export default NewsOpen;
         rgba(0, 0, 0, 0.630208) 58.33%,
         #000000 100%
     );
+    border-radius: 0 0 8px 8px;
 }
 .item-background {
     position: absolute;
@@ -691,6 +717,10 @@ export default NewsOpen;
     height: 100%;
     width: 100%;
     z-index: -2;
+    border-radius: 0 0 8px 8px;
+}
+.item-background > img {
+    border-radius: 0 0 8px 8px;
 }
 .text-content {
     display: flex;

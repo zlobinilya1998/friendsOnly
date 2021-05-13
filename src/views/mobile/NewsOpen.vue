@@ -129,7 +129,7 @@
                     </filter>
                 </defs>
             </svg>
-            <div class="like-bar" id="menu">
+            <div class="like-bar" ref="menu" id="menu">
                 <div class="like-item">
                     <svg
                         width="20"
@@ -321,12 +321,14 @@ const NewsOpen = {
         },
         handleScroll() {
             let pageY = window.pageYOffset;
+            let { menu } = this.$refs;
+            if (!menu) return;
             if (pageY > this.lastScrollTop) {
-                document.getElementById("menu").style.bottom = "-300px";
-                document.getElementById("menu").style.opacity = "0";
+                menu.style.bottom = "-300px";
+                menu.style.opacity = "0";
             } else {
-                document.getElementById("menu").style.bottom = "50px";
-                document.getElementById("menu").style.opacity = "1";
+                menu.style.bottom = "50px";
+                menu.style.opacity = "1";
             }
             this.lastScrollTop = pageY;
         },
@@ -409,7 +411,7 @@ export default NewsOpen;
 }
 
 .pre-view {
-    height: 50vh;
+    height: 51vh;
     background: #e9e9e9;
     border-radius: 0px 0px 20px 20px;
     padding: 30px 23px 37px;
